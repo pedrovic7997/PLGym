@@ -1,2 +1,2 @@
 # PLGym
-Aplicação Web desenvolvida para matéria Projeto Integrado I.
+Aplicação Web desenvolvida para a disciplina Projeto Integrado I.
