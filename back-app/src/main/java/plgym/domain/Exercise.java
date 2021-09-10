@@ -1,21 +1,23 @@
 package plgym.domain;
 
-public class Exercise {
-
-    private String name;
+public class Exercise
+{
     private String linkYT;
 
     private final String id;    // 10 dígitos
+    private final String name;
     private final float mets;
     private final Dificuldade dificuldade;
 
-    private enum Dificuldade {
+    private enum Dificuldade
+    {
         FACIL,
         MEDIO,
         DIFICIL,
     }
 
-    public Exercise(String id, String name, float mets, Dificuldade dificuldade) {
+    public Exercise(String id, String name, float mets, Dificuldade dificuldade)
+    {
         this.id = id;
         this.name = name;
         this.mets = mets;
@@ -28,9 +30,6 @@ public class Exercise {
     public float getMets() { return mets; }
     public Dificuldade getDificuldade() { return dificuldade; }
 
-    // Pode haver um erro no nome
-    public void setName(String name) { this.name = name; }
     // O vídeo pode sair do ar
     public void setLinkYT(String linkYT) { this.linkYT = linkYT; }
-
 }
