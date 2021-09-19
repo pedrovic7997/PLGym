@@ -4,32 +4,48 @@ public class Exercise
 {
     private String linkYT;
 
-    private final String id;    // 10 dígitos
     private final String name;
     private final float mets;
-    private final Dificuldade dificuldade;
+    private final Difficulty difficulty;
+    private final Category category;
 
-    private enum Dificuldade
+    private enum Difficulty
     {
         FACIL,
         MEDIO,
         DIFICIL,
     }
-
-    public Exercise(String id, String name, float mets, Dificuldade dificuldade)
+    
+    private enum Category
     {
-        this.id = id;
-        this.name = name;
-        this.mets = mets;
-        this.dificuldade = dificuldade;
+        OMBRO,
+        COSTAS,
+        LOMBAR,
+        TRICEPS,
+        BICEPS,
+        ANTEBRAÇO,
+        PEITO,
+        ABDOMEN,
+        QUADRIL,
+        COXA,
+        PANTURRILHA,
     }
 
-    public String getId() { return id; }
+    public Exercise(String name, float mets, Difficulty difficulty, Category category, String linkYT)
+    {
+        this.name = name;
+        this.mets = mets;
+        this.difficulty = difficulty;
+        this.category = category;
+        this.linkYT = linkYT;
+    }
+
     public String getName() { return name; }
     public String getLinkYT() { return linkYT; }
     public float getMets() { return mets; }
-    public Dificuldade getDificuldade() { return dificuldade; }
+    public Difficulty getDifficulty() { return difficulty; }
+    public Category getCategory() { return category; }
 
-    // O vídeo pode sair do ar
+    // Video isn't necessarily accessible forever
     public void setLinkYT(String linkYT) { this.linkYT = linkYT; }
 }
