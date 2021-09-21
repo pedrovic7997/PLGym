@@ -23,7 +23,7 @@ public class Exercise
         LOMBAR,
         TRICEPS,
         BICEPS,
-        ANTEBRAÇO,
+        ANTEBRACO,
         PEITO,
         ABDOMEN,
         QUADRIL,

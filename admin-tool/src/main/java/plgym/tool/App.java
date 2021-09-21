@@ -4,7 +4,6 @@ import java.util.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.FileInputStream;
 
 import com.google.gson.Gson;
 
@@ -80,11 +79,12 @@ public class App
                            "\n11. PANTURRILHA");
         System.out.print("Number corresponding to exercise category: ");
         String categoryString = keyReader.readLine();
-        Category category = Integer.parseInt(categoryString);
+        Category category = Category.values()[Integer.parseInt(categoryString) - 1];
         
         // Retrieves exercise METS value
         System.out.print("\nExercise METS: ");
-        String mets = keyReader.readLine();
+        String metsString = keyReader.readLine();
+        float mets = Float.parseFloat(metsString);
         
         // Difficulty list according to enum in class 'Exercise'
         System.out.println("\n1. FACIL" +
@@ -92,7 +92,7 @@ public class App
                            "\n3. DIFICIL");
         System.out.print("Number corresponding to exercise difficulty: ");
         String difficultyString = keyReader.readLine();
-        Difficulty difficulty = Integer.parseInt(difficultyString);
+        Difficulty difficulty = Difficulty.values()[Integer.parseInt(difficultyString) - 1];
         
         // Retrieves exercise chosen YouTube link
         System.out.print("\nExercise YouTube link: ");
@@ -113,7 +113,6 @@ public class App
         
         System.out.println("\nCreated successfully. Exercise ID is " + id);
     }
-   
     
     private static String getNewId(ExerciseList exerciseList)
     {
