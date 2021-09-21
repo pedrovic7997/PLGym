@@ -1,14 +1,14 @@
-package plgym.tool;
+package plgtool;
 
 import java.util.Map;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import com.google.gson.Gson;
-
+import plgym.*;
 import plgym.domain.Exercise;
-import plgym.domain.Exercise.*;
 import plgym.domain.ExerciseList;
 
 public class App
@@ -29,6 +29,7 @@ public class App
                 System.out.println("0. Exit");
                 System.out.println("1. Add new exercise");
                 System.out.println("2. Delete exercise");
+                // TODO updateExercise()
                 System.out.println("3. List all exercises");
                 System.out.print("Option: ");
                 option = keyReader.read();
@@ -106,10 +107,13 @@ public class App
         Exercise exercise = new Exercise(name, mets, difficulty, category, linkYT);
         exerciseList.addPair(id, exercise);
         
-        // Maps 'map' to JSON using GSON
-        Map<String, Exercise> map = exerciseList.getMap();
-        Gson gson = new Gson();
-        String json = gson.toJson(map);
+        // Creates JSON string to be written to file
+        String json = exerciseList.toJson();
+        
+        // Writes json to file
+        BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_JSON));
+        writer.write(json);
+        writer.close();
         
         System.out.println("\nCreated successfully. Exercise ID is " + id);
     }

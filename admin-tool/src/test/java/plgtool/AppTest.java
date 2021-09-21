@@ -1,4 +1,4 @@
-package plgym.tool;
+package plgtool;
 
 import static org.junit.Assert.assertTrue;
 

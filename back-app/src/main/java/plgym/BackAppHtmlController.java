@@ -9,6 +9,6 @@ public class BackAppHtmlController
 	@GetMapping("/")
 	public String getMain()
 	{
-		
+		return "";
 	}
 }
