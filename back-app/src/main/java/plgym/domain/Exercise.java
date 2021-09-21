@@ -9,14 +9,14 @@ public class Exercise
     private final Difficulty difficulty;
     private final Category category;
 
-    private enum Difficulty
+    public enum Difficulty
     {
         FACIL,
         MEDIO,
         DIFICIL,
     }
     
-    private enum Category
+    public enum Category
     {
         OMBRO,
         COSTAS,

@@ -2,11 +2,7 @@ package plgym.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -22,7 +18,7 @@ public class ExerciseList {
     // Mapa do BD local.
     public ExerciseList()
     {
-        File file = new File("../../../resources/database.json");
+        File file = new File("../../../resources/exerciseDatabase.json");
 
         try{
             FileReader filereader = new FileReader(file);
