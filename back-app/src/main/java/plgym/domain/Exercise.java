@@ -1,5 +1,8 @@
 package plgym.domain;
 
+import plgym.domain.subdomain.Category;
+import plgym.domain.subdomain.Difficulty;
+
 public class Exercise
 {
     private String linkYT;
@@ -8,28 +11,6 @@ public class Exercise
     private final float mets;
     private final Difficulty difficulty;
     private final Category category;
-
-    public enum Difficulty
-    {
-        FACIL,
-        MEDIO,
-        DIFICIL,
-    }
-    
-    public enum Category
-    {
-        OMBRO,
-        COSTAS,
-        LOMBAR,
-        TRICEPS,
-        BICEPS,
-        ANTEBRACO,
-        PEITO,
-        ABDOMEN,
-        QUADRIL,
-        COXA,
-        PANTURRILHA,
-    }
 
     public Exercise(String name, float mets, Difficulty difficulty, Category category, String linkYT)
     {

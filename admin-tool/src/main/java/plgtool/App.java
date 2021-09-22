@@ -1,15 +1,16 @@
 package plgtool;
 
+import plgym.domain.Exercise;
+import plgym.domain.ExerciseList;
+import plgym.domain.subdomain.Category;
+import plgym.domain.subdomain.Difficulty;
+
 import java.util.Map;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import plgym.*;
-import plgym.domain.Exercise;
-import plgym.domain.ExerciseList;
 
 public class App
 {
@@ -40,7 +41,7 @@ public class App
                     deleteExercise(keyReader, PATH_TO_JSON);
                 }
                 if(option == 3) {
-                    listAllExercises(keyReader, PATH_TO_JSON);
+                    listAllExercises(PATH_TO_JSON);
                 }
             }
             keyReader.close();
@@ -123,7 +124,7 @@ public class App
         return "0000000001"; // Placeholder
     }
     
-    private static void listAllExercises(BufferedReader keyReader, String PATH_TO_JSON)
+    private static void listAllExercises(String PATH_TO_JSON)
     {
         ExerciseList exerciseList = new ExerciseList(PATH_TO_JSON);
         Map<String, Exercise> map = exerciseList.getMap();
