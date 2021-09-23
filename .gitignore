@@ -24,3 +24,5 @@ hs_err_pid*
 
 # Manual additions
 .vscode/
+*.properties
+bin/

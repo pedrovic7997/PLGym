@@ -21,19 +21,20 @@ public class App
         BufferedReader keyReader = new BufferedReader( new InputStreamReader(System.in) );
         
         try {
-            System.out.println("Provide full path to .json: ");
+            System.out.println("\nProvide full path to Exercise Database JSON (ASCII only): ");
             String PATH_TO_JSON = keyReader.readLine();
             
             // Menu loops until 'Exit' is chosen
             while(option != 0) {
-                System.out.println("Choose an option:");
+                System.out.println("\nChoose an option:");
                 System.out.println("0. Exit");
                 System.out.println("1. Add new exercise");
                 System.out.println("2. Delete exercise");
                 // TODO updateExercise()
                 System.out.println("3. List all exercises");
                 System.out.print("Option: ");
-                option = keyReader.read();
+                String optionString = keyReader.readLine();
+                option = Integer.parseInt(optionString);
                 if(option == 1) {
                     addNewExercise(keyReader, PATH_TO_JSON);
                 }
@@ -53,7 +54,7 @@ public class App
 
     private static void deleteExercise(BufferedReader keyReader, String PATH_TO_JSON) throws IOException
     {
-        System.out.print("Exercise ID: ");
+        System.out.print("\nExercise ID: ");
         String id = keyReader.readLine();
         
         // deleta
@@ -64,7 +65,7 @@ public class App
     private static void addNewExercise(BufferedReader keyReader, String PATH_TO_JSON) throws IOException
     {
         // Retrieves exercise name
-        System.out.print("Exercise name: ");
+        System.out.print("\nExercise name: ");
         String name = keyReader.readLine();
         
         // Category list according to enum in class 'Exercise'

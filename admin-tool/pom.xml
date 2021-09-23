@@ -2,8 +2,9 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
-
+	
 	<groupId>plgtool</groupId>
 	<artifactId>admin-tool</artifactId>
 	<version>1.0</version>
@@ -13,7 +14,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +27,17 @@
 			<groupId>plgym</groupId>
 			<artifactId>back-app</artifactId>
 			<version>1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.31</version>
 		</dependency>
 	</dependencies>
 
@@ -50,6 +61,19 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>plgtool.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -70,18 +94,6 @@
 					<version>2.22.1</version>
 				</plugin>
 				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-					<configuration>
-						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-								<mainClass>plgtool.App</mainClass>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
 					<version>2.5.2</version>
 				</plugin>
@@ -100,4 +112,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 </project>
