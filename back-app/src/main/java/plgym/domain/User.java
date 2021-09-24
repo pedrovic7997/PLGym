@@ -29,4 +29,17 @@ public class User {
     public void setPassword( String password ) { this.password = password; }
     public void setHeight( float height ) { this.height = height; }
     public void setWeight( float weight ) { this.weight = weight; }
+
+    @Override
+    public String toString()
+    {
+        String userString = "Name: " + name;
+        userString += "\nBirthdate: " + birthdate;
+        userString += "\nEmail: " + email;
+        // userString += "\nPassword: " + password;
+        userString += "\nHeight: " + height;
+        userString += "\nWeight: " + weight;
+
+        return userString;
+    }
 }

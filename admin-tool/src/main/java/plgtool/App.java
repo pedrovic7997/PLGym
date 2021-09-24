@@ -6,6 +6,7 @@ import plgym.domain.subdomain.Category;
 import plgym.domain.subdomain.Difficulty;
 
 import java.util.Map;
+import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -21,7 +22,7 @@ public class App
         BufferedReader keyReader = new BufferedReader( new InputStreamReader(System.in) );
         
         try {
-            System.out.println("\nProvide full path to Exercise Database JSON (ASCII only): ");
+            System.out.println("\nProvide full path to Exercise Database JSON file (ASCII only): ");
             String PATH_TO_JSON = keyReader.readLine();
             
             // Menu loops until 'Exit' is chosen
@@ -35,15 +36,9 @@ public class App
                 System.out.print("Option: ");
                 String optionString = keyReader.readLine();
                 option = Integer.parseInt(optionString);
-                if(option == 1) {
-                    addNewExercise(keyReader, PATH_TO_JSON);
-                }
-                if(option == 2) {
-                    deleteExercise(keyReader, PATH_TO_JSON);
-                }
-                if(option == 3) {
-                    listAllExercises(PATH_TO_JSON);
-                }
+                if(option == 1) addNewExercise(keyReader, PATH_TO_JSON);
+                if(option == 2) deleteExercise(keyReader, PATH_TO_JSON);
+                if(option == 3) listAllExercises(PATH_TO_JSON);
             }
             keyReader.close();
             
@@ -51,13 +46,29 @@ public class App
             e.printStackTrace();
         }
     }
+    
+    private static void serializeExercises(ExerciseList exerciseList, String PATH_TO_JSON) throws IOException
+    {
+        // Creates JSON string to be written to file
+        String json = exerciseList.toJson();
+        
+        // Writes json to file
+        BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_JSON));
+        writer.write(json);
+        writer.close();
+    }
 
     private static void deleteExercise(BufferedReader keyReader, String PATH_TO_JSON) throws IOException
     {
+        // Retrieves ID of exercise to be deleted
         System.out.print("\nExercise ID: ");
         String id = keyReader.readLine();
         
-        // deleta
+        // Creates auxiliary exercise list with all registered exercises as objects
+        ExerciseList exerciseList = new ExerciseList(PATH_TO_JSON);
+        exerciseList.removePair(id);
+        
+        serializeExercises(exerciseList, PATH_TO_JSON);
         
         System.out.println("Deleted exercise [" + id + "] successfully.");
     }
@@ -109,25 +120,61 @@ public class App
         Exercise exercise = new Exercise(name, mets, difficulty, category, linkYT);
         exerciseList.addPair(id, exercise);
         
-        // Creates JSON string to be written to file
-        String json = exerciseList.toJson();
-        
-        // Writes json to file
-        BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_JSON));
-        writer.write(json);
-        writer.close();
+        serializeExercises(exerciseList, PATH_TO_JSON);
         
         System.out.println("\nCreated successfully. Exercise ID is " + id);
     }
     
-    private static String getNewId(ExerciseList exerciseList)
+    // Returns an ID not currently in use
+    public static String getNewId(ExerciseList exerciseList)
     {
-        return "0000000001"; // Placeholder
+        Map<String, Exercise> map = exerciseList.getMap();
+        
+        String id = "";
+        boolean idExists = true;
+        
+        // If a generated ID is already in use, while loops
+        while(idExists == true) {
+            
+            int leftLimit = 48;    // char '0'
+            int rightLimit = 57;   // char '9'
+            int stringLength = 10;
+            Random random = new Random();
+
+            StringBuilder buffer = new StringBuilder(stringLength);
+            
+            // Generates string of length 10 consisting strictly of numbers 0-9
+            for (int i = 0; i < stringLength; i++) {
+                /*  (rightLimit - leftLimit + 1) is how many possible values we want;
+                    random.nextFloat() acts as a random percentage;
+                    leftLimit is a baseline to which we add the product of the above.   */
+                int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            id = buffer.toString();
+            
+            idExists = false;
+            
+            for(String key : map.keySet()) {
+                if( id.equals(key) )
+                    idExists = true;
+                    break;
+            }
+        }
+        
+        return id;
     }
     
     private static void listAllExercises(String PATH_TO_JSON)
     {
+        // Creates auxiliary exercise list with all registered exercises as objects
         ExerciseList exerciseList = new ExerciseList(PATH_TO_JSON);
         Map<String, Exercise> map = exerciseList.getMap();
+
+        // Iterates through keys printing their corresponding objects
+        for (String id : map.keySet()) {
+            System.out.println("\nID: " + id + "\n" + map.get(id));
+        }
     }
 }

@@ -29,4 +29,16 @@ public class Exercise
 
     // Video isn't necessarily accessible forever
     public void setLinkYT(String linkYT) { this.linkYT = linkYT; }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append("Name: " + name);
+        strBuilder.append("\nMETS: " + mets);
+        strBuilder.append("\nDifficulty: " + difficulty);
+        strBuilder.append("\nCategory: " + category);
+        strBuilder.append("\nYouTube link: " + linkYT);
+        return strBuilder.toString();
+    }
 }

@@ -1,20 +1,18 @@
 package plgtool;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
+import plgym.domain.ExerciseList;
+
 public class AppTest
 {
-    /**
-     * Rigorous Test :-)
-     */
+    ExerciseList exerciseList = new ExerciseList("/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/admin-tool/teste.json");
+
     @Test
-    public void shouldAnswerWithTrue()
+    public void returnsNewId()
     {
-        assertTrue( true );
+        assertFalse( App.getNewId(exerciseList).equals("") );
     }
 }

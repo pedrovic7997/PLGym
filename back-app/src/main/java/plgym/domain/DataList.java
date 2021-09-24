@@ -2,11 +2,11 @@ package plgym.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,38 +15,54 @@ import com.google.gson.stream.JsonReader;
 public class DataList<T>
 {
     private Map<String, T> map;
-    private final Type MAP_TYPE = new TypeToken<Map<String, T>>() {}.getType();
+    // private final Type MAP_TYPE = new TypeToken<Map<String, T>>() {}.getType();
+    private TypeToken<Map<String, T>> mapType;
 
     // Creates DataList using specified file
-    public DataList(String PATH_TO_FILE)
+    public DataList(String PATH_TO_FILE, TypeToken<Map<String, T>> mapType)
     {
+        this.mapType = mapType;
         File file = new File(PATH_TO_FILE);
         
         if(file.exists()) {
+            // File should be at least an empty object
             try {
                 FileReader filereader = new FileReader(file);
                 JsonReader jReader = new JsonReader(filereader);
+                
                 Gson gson = new Gson();
-                this.map = gson.fromJson(jReader, MAP_TYPE);
-            } catch (FileNotFoundException e) {
+                this.map = gson.fromJson(jReader, mapType.getType());
+                
+                jReader.close();
+                filereader.close();
+                
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 file.createNewFile();
+                map = new HashMap<>();
+                
+                Gson gson = new Gson();
+                String json = gson.toJson(map);
+                
+                BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_FILE));
+                writer.write(json);
+                
+                writer.close();
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            map = new HashMap<>();
-            Gson gson = new Gson();
-            gson.toJson(map);
         }
     }
     
     // Creates DataList using specified IDs in 'database'
-    public DataList(String[] ids, DataList<T> database)
+    public DataList(String[] ids, DataList<T> database, TypeToken<Map<String, T>> mapType)
     {
         this.map = new HashMap<>();
+        this.mapType = mapType;
 
         for (String id : ids) {
             for (String keyId : database.map.keySet()) {
@@ -90,5 +106,5 @@ public class DataList<T>
         Gson gson = new Gson();
         return gson.toJson(map);
     }
-
+    
 }
