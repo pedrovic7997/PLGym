@@ -1,14 +1,21 @@
 package plgym;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import plgym.domain.Exercise;
+import plgym.domain.subdomain.Category;
+import plgym.domain.subdomain.Difficulty;
 
 @Controller
 public class BackAppHtmlController
 {
 	@GetMapping("/")
-	public String getMain()
+	public String getMain(Model model)
 	{
-		return "";
+		// Exercise exercise = new Exercise("nome", (float) 1.4, Difficulty.values()[0], Category.values()[0], "link");
+		// model.addAttribute("exercise", exercise);
+		return "index";
 	}
 }

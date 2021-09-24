@@ -70,6 +70,12 @@ public class DataList<T>
             }
         }
     }
+
+    public DataList(TypeToken<Map<String, T>> mapType)
+    {
+        this.map = new HashMap<>();
+        this.mapType = mapType;
+    }
 	
     public Map<String, T> getMap()
     {

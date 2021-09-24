@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class ExerciseList extends DataList<Exercise>
 {
+    public static final String DB_FILE_PATH = "../../../resources/exerciseDatabase.json";
+    
     public ExerciseList()
     {
-        super("../../../resources/exerciseDatabase.json", new TypeToken<Map<String, Exercise>>() {});
+        super(new TypeToken<Map<String, Exercise>>() {});
     }
     
     public ExerciseList(String PATH_TO_FILE)
