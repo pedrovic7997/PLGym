@@ -23,7 +23,7 @@ import plgym.domain.UserList;
 @RestController
 public class BackAppController
 {
-    private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Copia com Spring Security/back-app/src/main/resources/data/";
+    private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + "exercises.json");
     public static UserList userDB = new UserList(filePath + "users.json");
 
