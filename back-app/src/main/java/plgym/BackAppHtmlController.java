@@ -26,4 +26,9 @@ public class BackAppHtmlController
     public String login() {
         return "login";
     }
+
+	@RequestMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
 }
