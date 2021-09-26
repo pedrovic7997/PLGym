@@ -1,37 +1,25 @@
+/**** CAROUSEL ****/
+
 .carousel-item {
-    height: 42rem;
+    height: 100%;
     background: #777;
     position: relative;
 }
-.carousel-container {
+.container-index {
     display: flex;
-    position: absolute;
     justify-content: center;
-    align-items: center;
-    flex-flow: wrap;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-bottom: 50px;
-}
-.carousel-header {
-}
-.index-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-.index-carousel-div {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-.index-carousel-width {
-    width: 1200px;
     height: 100%;
-    align-self: center;
-    padding-top: 50px;
 }
+.carousel-inner {
+    max-width: 80rem;
+    height: 700px;
+}
+.carousel {
+    height: 100%;
+}
+
+/**** BOTÕES INDEX ****/
+
 .index-buttons {
     display: flex;
     width: 100%;
@@ -48,13 +36,13 @@
 }
 .index-button-signup {
     color: #fff;
-    background-color: #b02a37;
-    border-color: #6a1a21;
+    background-color: #0d6efd;
+    border-color: #0a58ca;
 }
 .index-button-signup:hover {
     color: #fff;
-    background-color: #842029;
-    border-color: #6a1a21;
+    background-color: #0a58ca;
+    border-color: #0a58ca;
 }
 .index-button-login {
     color: #fff;
@@ -66,6 +54,9 @@
     background-color: #0b5ed7;
     border-color: #0a58ca;
 }
+
+/**** LOGIN ****/
+
 .login-container {
     display: flex;
     height: 90vh;
