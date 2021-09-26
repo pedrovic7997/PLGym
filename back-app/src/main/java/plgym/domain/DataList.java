@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -67,9 +68,8 @@ public class DataList<T>
         this.mapType = mapType;
 
         for (String id : ids) {
-            for (String keyId : database.map.keySet()) {
-                if (id.equals(keyId)) this.map.put(id, database.map.get(keyId));
-            }
+            T value = database.getValue(id);
+            if (value != null) this.map.put(id, value);
         }
     }
 
@@ -113,6 +113,46 @@ public class DataList<T>
     {
         Gson gson = new Gson();
         return gson.toJson(map);
+    }
+
+    //  Get a new and valid id value
+    public String getNewId()
+    {
+        String id = "";
+        boolean idExists = true;
+
+        // If a generated ID is already in use, while loops
+        while(idExists == true) {
+
+            int leftLimit = 48;    // char '0'
+            int rightLimit = 57;   // char '9'
+            int stringLength = 10;
+            Random random = new Random();
+
+            StringBuilder buffer = new StringBuilder(stringLength);
+
+            // Generates string of length 10 consisting strictly of numbers 0-9
+            for (int i = 0; i < stringLength; i++) {
+                /*  (rightLimit - leftLimit + 1) is how many possible values we want;
+                    random.nextFloat() acts as a random percentage;
+                    leftLimit is a baseline to which we add the product of the above.   */
+                int randomLimitedInt = leftLimit + (int)
+                        (random.nextFloat() * (rightLimit - leftLimit + 1));
+                buffer.append((char) randomLimitedInt);
+            }
+            id = buffer.toString();
+
+            idExists = false;
+
+            for(String key : map.keySet()) {
+                if( id.equals(key) ) {
+                    idExists = true;
+                    break;
+                }
+            }
+        }
+
+        return id;
     }
     
 }

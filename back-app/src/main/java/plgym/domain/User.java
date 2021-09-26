@@ -9,9 +9,11 @@ public class User {
     private String password;
     private float height;
     private float weight;
+    private String[] exerciseIdList;
+    // TODO exerciseIdList precisa ser não ordenado e fácil de adicionar e remover
 
     public User( String name, String birthdate, String email, String password,
-                 float height, float weight )
+                 float height, float weight, String[] exercises)
     {
         this.name = name;
         this.birthdate = birthdate;
@@ -19,6 +21,7 @@ public class User {
         this.password = password;
         this.height = height;
         this.weight = weight;
+        this.exerciseIdList = exercises;
     }
 
     public String getName() { return this.name; }
