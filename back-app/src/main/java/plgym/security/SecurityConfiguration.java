@@ -25,22 +25,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/", "/signup").permitAll()
-            .antMatchers("/dashboard").access("hasAnyAuthority('USER')")
-            // .antMatchers("/dashboard").access("hasAnyAuthority('USER')")
-            // .antMatchers("/admin").access("hasAnyAuthority('ADMIN')")
-            .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
-        .and()
-        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        .logoutSuccessUrl("/login").permitAll()
-        ;
+                .antMatchers("/", "/signup").permitAll()
+                .antMatchers("/dashboard").access("hasAnyAuthority('USER')")
+                .antMatchers("/myworkout").access("hasAnyAuthority('USER')")
+                .antMatchers("/discover").access("hasAnyAuthority('USER')")
+                .antMatchers("/suggestions").access("hasAnyAuthority('USER')")
+                .antMatchers("/profile").access("hasAnyAuthority('USER')")
+//              .antMatchers("/admin").access("hasAnyAuthority('ADMIN')")
+            .anyRequest()
+                .authenticated()
+            .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+            .and()
+            .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login").permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         for (User user : BackAppController.userDB.getMap().values()) {
-            auth.inMemoryAuthentication().withUser(user.getEmail())
-                .password(passwordEncoder().encode(user.getPassword())).authorities("USER");
+            auth.inMemoryAuthentication()
+                .withUser(user.getEmail())
+                .password(passwordEncoder().encode(user.getPassword()))
+                .authorities("USER");
         }
     }
 

@@ -17,7 +17,7 @@ public class BackAppHtmlController
 	{
 		// Exercise exercise = new Exercise("nome", (float) 1.4, Difficulty.values()[0], Category.values()[0], "link");
 		// model.addAttribute("exercise", exercise);
-		return "startbootstrap-simple-sidebar-gh-pages/index";
+		return "dashboard";
 	}
 
 	// TODO: FAZER UMA DIRETORIO PRA ESCOLHER: LOGIN -> RAIZ OU SIGNUP -> LOGIN -> RAIZ

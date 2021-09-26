@@ -1,1 +1,18 @@
-{"1651210668":{"weight":70.2,"password":"zojndfjunzd","name":"fulano","height":126.0,"email":"fulano@gmail.com","birthdate":"05/10/1992"},"7140225689":{"weight":99.5,"password":"hbuoavdfuiyryuiq","name":"sicrano","height":180.58,"email":"sicrano@gmail.com","birthdate":"20/07/1979"}}
+{
+  "1651210668": {
+    "weight":70.2,
+    "password":"zojndfjunzd",
+    "name":"fulano",
+    "height":126.0,
+    "email":"fulano@gmail.com",
+    "birthdate":"05/10/1992"
+  },
+  "7140225689": {
+    "weight":99.5,
+    "password":"hbuoavdfuiyryuiq",
+    "name":"sicrano",
+    "height":180.58,
+    "email":"sicrano@gmail.com",
+    "birthdate":"20/07/1979"
+  }
+}

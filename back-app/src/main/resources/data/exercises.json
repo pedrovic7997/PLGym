@@ -1,1 +1,16 @@
-{"0000000001":{"linkYT":"coisaqualquer","name":"panturrilha","mets":420.0,"difficulty":"DIFICIL","category":"PANTURRILHA"},"2200076425":{"linkYT":"tustus","name":"agachamento","mets":777.0,"difficulty":"MEDIO","category":"COXA"}}
+{
+  "0000000001": {
+    "linkYT":"www.link.com/1",
+    "name":"Panturrilha",
+    "mets":4.2,
+    "difficulty":"DIFICIL",
+    "category":"PANTURRILHA"
+  },
+  "2200076425": {
+    "linkYT":"www.link.com/2",
+    "name":"Agachamento",
+    "mets":1.0,
+    "difficulty":"MEDIO",
+    "category":"COXA"
+  }
+}
