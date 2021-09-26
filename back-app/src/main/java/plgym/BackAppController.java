@@ -23,9 +23,20 @@ import plgym.domain.UserList;
 @RestController
 public class BackAppController
 {
-    private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
+//    private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
+    private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + "exercises.json");
     public static UserList userDB = new UserList(filePath + "users.json");
+
+    public String printAll()
+    {
+        String ex = "";
+        for(String id : userDB.getMap().keySet()) {
+            System.out.println(userDB.getValue(id));
+            ex = id;
+        }
+        return ex;
+    }
 
     // @GetMapping("/exercises")
 	// public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer)
