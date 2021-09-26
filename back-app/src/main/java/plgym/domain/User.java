@@ -1,5 +1,7 @@
 package plgym.domain;
 
+// TODO Verificar serialização do User
+
 public class User {
     private final String name;
     private final String birthdate;

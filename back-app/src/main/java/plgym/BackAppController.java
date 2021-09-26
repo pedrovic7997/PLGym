@@ -38,6 +38,12 @@ public class BackAppController
         return ex;
     }
 
+    // TODO POST para adicionar um exercício na lista de exercícios dinâmica de um usuário, seguido de serialização na mesma função
+
+    // TODO DELETE para remover um exercício na lista de exercícios dinâmica de um usuário, seguido de serialização na mesma função
+
+    // TODO Pensar em uma forma de não modificar json toda hora (botão de salvar na seção "My Workout" enviando a lista modificada)
+
     // @GetMapping("/exercises")
 	// public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer)
     // {

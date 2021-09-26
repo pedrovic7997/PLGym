@@ -57,7 +57,9 @@ public class DataList<T>
             }
         }
     }
-    
+
+    // TODO Testar criação da DataList abaixo com os IDs de uma array de exercícios desserializada
+
     // Creates DataList using specified IDs in 'database'
     public DataList(String[] ids, DataList<T> database, TypeToken<Map<String, T>> mapType)
     {
