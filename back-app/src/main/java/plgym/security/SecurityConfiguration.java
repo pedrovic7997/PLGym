@@ -26,7 +26,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/signup", "/js/**", "/css/**", "/assets/**").permitAll()
-                .antMatchers("/dashboard").access("hasAnyAuthority('USER')")
                 .antMatchers("/myworkout").access("hasAnyAuthority('USER')")
                 .antMatchers("/discover").access("hasAnyAuthority('USER')")
                 .antMatchers("/suggestions").access("hasAnyAuthority('USER')")
@@ -37,12 +36,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/dashboard", true)
+                .defaultSuccessUrl("/myworkout", true)
                 .permitAll()
             .and()
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout").permitAll();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Override

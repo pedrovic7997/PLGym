@@ -18,8 +18,28 @@ public class BackAppHtmlController
         return "login";
     }
 
-	@RequestMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
+	@RequestMapping("/myworkout")
+    public String myWorkout() {
+        return "myworkout";
     }
+
+	@RequestMapping("/signup")
+	public String signup() {
+		return "signup";
+	}
+
+	@RequestMapping("/discover")
+	public String discover() {
+		return "discover";
+	}
+
+	@RequestMapping("/suggestions")
+	public String suggestions() {
+		return "suggestions";
+	}
+
+	@RequestMapping("/profile")
+	public String profile() {
+		return "profile";
+	}
 }
