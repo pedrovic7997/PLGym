@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PLGym - Cadastro</title>
     <!-- Favicon -->
@@ -11,7 +12,9 @@
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom-styles.css}">
-    <link rel="stylesheet" href="../static/css/custom-styles.css">
+    <!-- <link rel="stylesheet" href="../static/css/custom-styles.css"> -->
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -22,23 +25,46 @@
                         E-mail já cadastrado!
                     </div>
                 </div>
-                <form th:action="@{/signup}" method="post">
+                <!-- <form th:action="@{/signup}" method="post"> -->
+                <form>
                     <div class="mb-3">
-                        <label for="email" class="form-label">E-Mail</label>
-                        <input type="email" name="username" class="form-control" id="email" th:required>
+                        <label for="userEmail" class="form-label">E-Mail</label>
+                        <input type="email" name="email" class="form-control" id="email" th:required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
+                        <label for="userPassword" class="form-label">Senha</label>
                         <input type="password" name="password" class="form-control" id="password" th:required>
                     </div>
                     <div class="mb-3">
                         <label for="confirmation" class="form-label">Confirmar senha</label>
                         <input type="password"  class="form-control" id="confirmation">
                     </div>
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
+                    <button type="submit" onclick="handleForm()" class="btn btn-primary">Cadastrar</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+		function handleForm() {
+			var data = {
+				"email" : $("#userEmail").val(),
+				"password" : $("#userPassword").val()
+			};
+
+			$.ajax("http://localhost:8080/user", {
+				type : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				async : false,
+				success : function() {
+					alert("Usuario registrado!");
+					window.location.href = '/';
+				},
+			});
+		}
+	</script>
 </body>
 </html>

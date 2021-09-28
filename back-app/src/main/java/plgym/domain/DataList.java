@@ -85,9 +85,9 @@ public class DataList<T>
     }
     
     // Insert item
-    public void addPair(String id, T exercise)
+    public void addPair(String id, T content)
     {
-        map.put(id, exercise);
+        map.put(id, content);
     }
 
     // Get item
@@ -103,9 +103,9 @@ public class DataList<T>
     }
 
     // Update item
-    public void updateValue(String id, T exercise)
+    public void updateValue(String id, T content)
     {
-        map.replace(id, exercise);
+        map.replace(id, content);
     }
 
     // Transform map to JSON string

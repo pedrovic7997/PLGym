@@ -18,13 +18,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import plgym.domain.Exercise;
 import plgym.domain.ExerciseList;
+import plgym.domain.User;
 import plgym.domain.UserList;
 
 @RestController
 public class BackAppController
 {
-//    private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
-    private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+   	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
+    // private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + "exercises.json");
     public static UserList userDB = new UserList(filePath + "users.json");
 
@@ -44,25 +45,28 @@ public class BackAppController
 
     // TODO Pensar em uma forma de não modificar json toda hora (botão de salvar na seção "My Workout" enviando a lista modificada)
 
-    // @GetMapping("/exercises")
-	// public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer)
-    // {
-	// 	ExerciseList filteredExercises = new ExerciseList();
-	// 	for (Exercise exercise : exerciseDB.getMap().values())
-	// 	{
-	// 		if (exercise.getName().contains(exer))
-	// 			filteredExercises.add(exercise);
-	// 	}
-	// 	return filteredExercises;
-	// }
+    @GetMapping("/exercises")
+	public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer)
+    {
+		ExerciseList filteredExercises = new ExerciseList();
+		for (Exercise exercise : exerciseDB.getMap().values())
+		{
+			if (exercise.getName().contains(exer)){
+				String id = filteredExercises.getNewId();
+				filteredExercises.addPair(id, exercise);
+			}
+		}
+		return filteredExercises;
+	}
 
-	// @GetMapping("/exercises/{id}")
-	// public Exercise getExercise(@PathVariable(name = "id") long id) {
-	// 	if (exerciseDB.getValue(Long.toString(id)) == null)
-	// 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
-	// 	else
-	// 		return exerciseDB.getValue(Long.toString(id));
-	// }
+	// Fazer o exercicio tb estar ciente do ID?
+	@GetMapping("/exercises/{id}")
+	public Exercise getExercise(@PathVariable(name = "id") long id) {
+		if (exerciseDB.getValue(Long.toString(id)) == null)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
+		else
+			return exerciseDB.getValue(Long.toString(id));
+	}
 
 	// // Quando um usuário criar sua lista de exercicio existente?
 	// @PutMapping("/exercises/{id}")
@@ -87,5 +91,23 @@ public class BackAppController
 	// 	nextId++;
 	// 	return c;
 	// }
+
+	// Fazer o user estar ciente do proprio ID?
+	@GetMapping("/user/{id}")
+	public User getUser(@PathVariable(name = "id") long id) {
+		if (userDB.getValue(Long.toString(id)) == null)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
+		else
+			return userDB.getValue(Long.toString(id));
+		
+	}
+
+	@PostMapping("/user")
+	public User postUser(@RequestBody User newUser) {
+		String newId = userDB.getNewId();
+		userDB.addPair(newId, newUser);
+		System.out.println(userDB.toJson());
+		return newUser;
+	}
 
 }
