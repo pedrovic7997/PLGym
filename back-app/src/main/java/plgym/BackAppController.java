@@ -1,5 +1,8 @@
 package plgym;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,20 +28,20 @@ import plgym.domain.UserList;
 @RestController
 public class BackAppController
 {
-   	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
-    // private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
-    public static ExerciseList exerciseDB = new ExerciseList(filePath + "exercises.json");
-    public static UserList userDB = new UserList(filePath + "users.json");
-	public static String currentSession;
-	public static String currentUser;
+//   	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
+	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+	private static final String userDbFileName = "users.json";
+	private static final String exerciseDbFileName = "exercises.json";
+    public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
+    public static UserList userDB = new UserList(filePath + userDbFileName);
 
-	
+
     // TODO POST para adicionar um exercício na lista de exercícios dinâmica de um usuário, seguido de serialização na mesma função
-	
+
     // TODO DELETE para remover um exercício na lista de exercícios dinâmica de um usuário, seguido de serialização na mesma função
-	
+
     // TODO Pensar em uma forma de não modificar json toda hora (botão de salvar na seção "My Workout" enviando a lista modificada)
-	
+
     @GetMapping("/exercises")
 	public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer, Principal principal)
     {
@@ -53,7 +56,7 @@ public class BackAppController
 		}
 		return filteredExercises;
 	}
-	
+
 	// Fazer o exercicio tb estar ciente do ID?
 	@GetMapping("/exercises/{id}")
 	public Exercise getExercise(@PathVariable(name = "id") long id)
@@ -63,7 +66,7 @@ public class BackAppController
 		else
 		return exerciseDB.getValue(Long.toString(id));
 	}
-	
+
 	// Fazer o user estar ciente do proprio ID?
 	@GetMapping("/user/{id}")
 	public User getUser(@PathVariable(name = "id") long id)
@@ -72,9 +75,9 @@ public class BackAppController
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
 		else
 		return userDB.getValue(Long.toString(id));
-		
+
 	}
-	
+
 	@PostMapping("/user")
 	public User postUser(@RequestBody User newUser)
 	{
@@ -93,12 +96,12 @@ public class BackAppController
 	// 	agenda.put(id, c);
 	// 	return c;
 	// }
-	
+
 	// @DeleteMapping("/exercises/{id}")
 	// public void deleteContato(@PathVariable(name = "id") long id) {
 		// 	agenda.remove(id);
 		// }
-		
+
 	// @PostMapping("/exercises")
 	// public Contato postContato(@RequestBody Contato c) {
 		// 	c.setId(nextId);
@@ -106,8 +109,8 @@ public class BackAppController
 		// 	nextId++;
 		// 	return c;
 		// }
-			
-			
+
+
 	public String printAll()
 	{
 		String ex = "";
@@ -117,6 +120,17 @@ public class BackAppController
 		}
 		return ex;
 	}
-		
+
+
+	public void serializeJson(String json, String fileName)
+	{
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(filePath + fileName));
+			writer.write(json);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
-			

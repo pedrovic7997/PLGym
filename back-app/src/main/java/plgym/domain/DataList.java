@@ -16,13 +16,10 @@ import com.google.gson.stream.JsonReader;
 public class DataList<T>
 {
     private Map<String, T> map;
-    // private final Type MAP_TYPE = new TypeToken<Map<String, T>>() {}.getType();
-    private TypeToken<Map<String, T>> mapType;
 
     // Creates DataList using specified file
     public DataList(String PATH_TO_FILE, TypeToken<Map<String, T>> mapType)
     {
-        this.mapType = mapType;
         File file = new File(PATH_TO_FILE);
         
         if(file.exists()) {
@@ -65,7 +62,6 @@ public class DataList<T>
     public DataList(String[] ids, DataList<T> database, TypeToken<Map<String, T>> mapType)
     {
         this.map = new HashMap<>();
-        this.mapType = mapType;
 
         for (String id : ids) {
             T value = database.getValue(id);
@@ -76,7 +72,6 @@ public class DataList<T>
     public DataList(TypeToken<Map<String, T>> mapType)
     {
         this.map = new HashMap<>();
-        this.mapType = mapType;
     }
 	
     public Map<String, T> getMap()
@@ -122,7 +117,7 @@ public class DataList<T>
         boolean idExists = true;
 
         // If a generated ID is already in use, while loops
-        while(idExists == true) {
+        while(idExists) {
 
             int leftLimit = 48;    // char '0'
             int rightLimit = 57;   // char '9'

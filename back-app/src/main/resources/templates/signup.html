@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PLGym - Cadastro</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom-styles.css}">
     <!-- <link rel="stylesheet" href="../static/css/custom-styles.css"> -->
@@ -28,16 +29,16 @@
                 <!-- <form th:action="@{/signup}" method="post"> -->
                 <form>
                     <div class="mb-3">
-                        <label for="userEmail" class="form-label">E-Mail</label>
-                        <input type="email" name="email" class="form-control" id="email" th:required>
+                        <label for="email" class="form-label">E-Mail</label>
+                        <input type="email" name="email" class="form-control" id="email">
                     </div>
                     <div class="mb-3">
-                        <label for="userPassword" class="form-label">Senha</label>
-                        <input type="password" name="password" class="form-control" id="password" th:required>
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="mb-3">
                         <label for="confirmation" class="form-label">Confirmar senha</label>
-                        <input type="password"  class="form-control" id="confirmation">
+                        <input type="password" class="form-control" id="confirmation">
                     </div>
                     <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
                     <button type="button" onclick="handleForm()" class="btn btn-primary">Cadastrar</button>
@@ -48,11 +49,10 @@
 
     <script>
 		function handleForm() {
-			var data = {
-				"email" : $("#userEmail").val(),
-				"password" : $("#userPassword").val()
+			let data = {
+				"email" : $("#email").val(),
+				"password" : $("#password").val()
 			};
-
 			$.ajax("http://localhost:8080/user", {
 				type : 'POST',
 				contentType : 'application/json',
@@ -60,11 +60,16 @@
 				dataType : 'json',
 				async : false,
 				success : function() {
-					alert("Usuario registrado!");
+					alert("Registrado com sucesso!");
 					window.location.href = '/';
 				},
 			});
 		}
 	</script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+    </script>
 </body>
 </html>
