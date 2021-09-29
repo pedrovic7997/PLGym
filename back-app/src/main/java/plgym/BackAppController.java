@@ -28,8 +28,8 @@ import plgym.domain.UserList;
 @RestController
 public class BackAppController
 {
-//   	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
-	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+  	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
+	// private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
 	private static final String userDbFileName = "users.json";
 	private static final String exerciseDbFileName = "exercises.json";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
@@ -68,14 +68,28 @@ public class BackAppController
 	}
 
 	// Fazer o user estar ciente do proprio ID?
-	@GetMapping("/user/{id}")
-	public User getUser(@PathVariable(name = "id") long id)
-	{
-		if (userDB.getValue(Long.toString(id)) == null)
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
-		else
-		return userDB.getValue(Long.toString(id));
+	// @GetMapping("/user/{id}")
+	// public User getUser(@PathVariable(name = "id") long id)
+	// {
+	// 	if (userDB.getValue(Long.toString(id)) == null)
+	// 	throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
+	// 	else
+	// 	return userDB.getValue(Long.toString(id));
 
+	// }
+
+	@GetMapping("/user")
+	public User getUser(Principal principal)
+	{
+		
+		for (User u : userDB.getMap().values()) {
+			if(u.getEmail().contains(principal.getName())){
+				// System.out.println();
+				return u;
+			}
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
+		
 	}
 
 	@PostMapping("/user")
@@ -84,6 +98,25 @@ public class BackAppController
 		String newId = userDB.getNewId();
 		userDB.addPair(newId, newUser);
 		return newUser;
+	}
+
+	@PutMapping("/user")
+	public User putUser(@RequestBody String[] exercisesId,
+						Principal principal)
+	{
+		for (User u : userDB.getMap().values()) {
+			if(u.getEmail().contains(principal.getName())){
+				System.out.println(u.getExercisesId());
+				if(u.getExercisesId() == null){
+					u.constructExerciseId();
+				}
+				for (String exerciseId : exercisesId) {
+					u.addExerciseId(exerciseId);
+				}
+				return u;
+			}
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
 	}
 
 	// // Quando um usuário criar sua lista de exercicio existente?

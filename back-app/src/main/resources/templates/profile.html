@@ -12,8 +12,28 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom-styles.css}">
     <!-- <link rel="stylesheet" href="../static/css/custom-styles.css"> -->
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
-
+    <div>
+        <button type="button" onclick="handleForm()" class="btn btn-primary">Pedir Panturrilha e Coxa</button>
+    </div>
+    <script>
+		function handleForm() {
+			let data = ["0000000001", "2200076425"];
+			$.ajax("http://localhost:8080/user", {
+				type : 'PUT',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				async : false,
+				success : function() {
+					alert("Registrado com sucesso!");
+					window.location.href = '/myworkout';
+				},
+			});
+		}
+	</script>
 </body>
 </html>
