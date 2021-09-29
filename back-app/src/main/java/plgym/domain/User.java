@@ -15,6 +15,23 @@ public class User {
     private Set<String> exerciseIdList;
     // TODO exerciseIdList precisa ser não ordenado e fácil de adicionar e remover
 
+    // public User( String name, String birthdate, String email, String password,
+    //              float height, float weight)
+    // {
+    //     this.name = name;
+    //     this.birthdate = birthdate;
+    //     this.email = email;
+    //     this.password = password;
+    //     this.height = height;
+    //     this.weight = weight;
+    // }
+
+    // public User( String email, String password)
+    // {
+    //     this.email = email;
+    //     this.password = password;
+    // }
+
     public User( String name, String birthdate, String email, String password,
                  float height, float weight, Set<String> exercises)
     {
@@ -67,12 +84,12 @@ public class User {
         // userString += "\nPassword: " + password;
         userString += "\nHeight: " + height;
         userString += "\nWeight: " + weight;
-        userString += "\nExercises: {";
-        for (String exerciseId : exerciseIdList)
-        {
-            userString += " \'" + exerciseId + "\'";
-        }
-        userString += " }";
+        // userString += "\nExercises: {";
+        // for (String exerciseId : exerciseIdList)
+        // {
+        //     userString += " \'" + exerciseId + "\'";
+        // }
+        // userString += " }";
 
         return userString;
     }

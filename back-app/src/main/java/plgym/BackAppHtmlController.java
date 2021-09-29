@@ -23,7 +23,7 @@ public class BackAppHtmlController
     }
 
 	@RequestMapping("/myworkout")
-    public String myWorkout(HttpSession session) {
+    public String myWorkout() {
         return "myworkout";
     }
 

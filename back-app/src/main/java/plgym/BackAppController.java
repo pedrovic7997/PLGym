@@ -95,7 +95,10 @@ public class BackAppController
 	@PostMapping("/user")
 	public User postUser(@RequestBody User newUser)
 	{
+		// User newUser = new User(email, password);
+		System.out.println(newUser);
 		String newId = userDB.getNewId();
+		System.out.println(newId + " " + newUser.getEmail() + " " + newUser.getPassword());
 		userDB.addPair(newId, newUser);
 		return newUser;
 	}
@@ -118,6 +121,8 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
 	}
+
+
 
 	// // Quando um usuário criar sua lista de exercicio existente?
 	// @PutMapping("/exercises/{id}")
@@ -144,7 +149,7 @@ public class BackAppController
 		// }
 
 
-	public String printAll()
+	public static String printAll()
 	{
 		String ex = "";
 		for(String id : userDB.getMap().keySet()) {
