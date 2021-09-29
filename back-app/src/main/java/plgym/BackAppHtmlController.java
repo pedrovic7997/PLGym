@@ -1,5 +1,9 @@
 package plgym;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +23,9 @@ public class BackAppHtmlController
     }
 
 	@RequestMapping("/myworkout")
-    public String myWorkout() {
+    public String myWorkout(HttpSession session, Principal principal) {
+		BackAppController.currentSession = session.getId();
+		BackAppController.currentUser = principal.getName();
         return "myworkout";
     }
 
