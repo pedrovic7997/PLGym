@@ -23,9 +23,7 @@ public class BackAppHtmlController
     }
 
 	@RequestMapping("/myworkout")
-    public String myWorkout(HttpSession session, Principal principal) {
-		BackAppController.currentSession = session.getId();
-		BackAppController.currentUser = principal.getName();
+    public String myWorkout(HttpSession session) {
         return "myworkout";
     }
 
