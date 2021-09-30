@@ -8,11 +8,11 @@ public class Exercise
     private String linkYT;
 
     private final String name;
-    private final float mets;
+    private final double mets;
     private final Difficulty difficulty;
     private final Category category;
 
-    public Exercise(String name, float mets, Difficulty difficulty, Category category, String linkYT)
+    public Exercise(String name, double mets, Difficulty difficulty, Category category, String linkYT)
     {
         this.name = name;
         this.mets = mets;
@@ -23,7 +23,7 @@ public class Exercise
 
     public String getName() { return name; }
     public String getLinkYT() { return linkYT; }
-    public float getMets() { return mets; }
+    public double getMets() { return mets; }
     public Difficulty getDifficulty() { return difficulty; }
     public Category getCategory() { return category; }
 
@@ -33,12 +33,11 @@ public class Exercise
     @Override
     public String toString()
     {
-        StringBuilder strBuilder = new StringBuilder();
-        strBuilder.append("Name: " + name);
-        strBuilder.append("\nMETS: " + mets);
-        strBuilder.append("\nDifficulty: " + difficulty);
-        strBuilder.append("\nCategory: " + category);
-        strBuilder.append("\nYouTube link: " + linkYT);
-        return strBuilder.toString();
+        String str = "Name: " + name;
+        str += "\nMETS: " + mets;
+        str += "\nDifficulty: " + difficulty;
+        str += "\nCategory: " + category;
+        str += "\nYouTube link: " + linkYT;
+        return str;
     }
 }

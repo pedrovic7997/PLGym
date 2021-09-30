@@ -3,8 +3,6 @@ package plgym.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-// TODO Verificar serialização do User
-
 public class User {
     private String name;
     private String birthdate;
@@ -13,7 +11,6 @@ public class User {
     private double height;
     private double weight;
     private Set<String> exerciseIdList = new HashSet<>();
-    // TODO exerciseIdList precisa ser não ordenado e fácil de adicionar e remover
 
     public User(){}
 
@@ -28,12 +25,6 @@ public class User {
          this.height = height;
          this.weight = weight;
      }
-
-    // public User( String email, String password)
-    // {
-    //     this.email = email;
-    //     this.password = password;
-    // }
 
     public User( String name, String birthdate, String email, String password,
                  double height, double weight, Set<String> exercises)
@@ -82,7 +73,6 @@ public class User {
 
     public void addExerciseId( String exerciseId ) { this.exerciseIdList.add(exerciseId); }
     public void removeExerciseId( String exerciseId ) { this.exerciseIdList.remove(exerciseId); }
-    public void constructExerciseId() { this.exerciseIdList = new HashSet<>();}
 
     @Override
     public String toString()
@@ -93,12 +83,11 @@ public class User {
         // userString += "\nPassword: " + password;
         userString += "\nHeight: " + height;
         userString += "\nWeight: " + weight;
-        // userString += "\nExercises: {";
-        // for (String exerciseId : exerciseIdList)
-        // {
-        //     userString += " \'" + exerciseId + "\'";
-        // }
-        // userString += " }";
+        userString += "\nExercises: {";
+        for (String exerciseId : exerciseIdList) {
+            userString += " '" + exerciseId + "'";
+        }
+        userString += " }";
 
         return userString;
     }

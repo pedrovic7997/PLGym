@@ -11,14 +11,84 @@
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom-styles.css}">
-    <!-- <link rel="stylesheet" href="../static/css/custom-styles.css"> -->
+    <!--<link rel="stylesheet" href="../static/css/custom-styles.css"> -->
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
-    <div>
-        <button type="button" onclick="handleForm()" class="btn btn-primary">Pedir Panturrilha e Coxa</button>
+
+    <div class="login-container">
+        <div class="login-container-box">
+            <div class="container-fluid">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger" role="alert">
+                        E-mail já cadastrado!
+                    </div>
+                </div>
+                <!-- <form th:action="@{/signup}" method="post"> -->
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="name" name="name" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Peso (Opcional)</label>
+                        <input type="weight" name="weight" class="form-control" id="weight">
+                    </div>
+                    <div class="mb-3">
+                        <label for="height" class="form-label">Altura (Opcional)</label>
+                        <input type="height" name="height" class="form-control" id="height">
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthdate" class="form-label">Data de Nascimento</label>
+                        <input type="birthdate" name="birthdate" class="form-control" id="birthdate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-Mail</label>
+                        <input type="email" name="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" name="password" class="form-control" id="password">
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
+                    <button type="button" onclick="handleForm()" class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Password</label>
+        </div>
+        <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" disabled="true" aria-describedby="passwordHelpInline" placeholder="">
+        </div>
+        <div class="col-auto">
+            <button type="submit" style="border: 0; background: transparent" onclick="handleEdit()">
+                <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+            </button>
+        </div>
+    </div>
+
+    <div class="index-buttons">
+        <div class="container-button-signup">
+            <div>
+                <a th:href="@{/logout}" class="btn btn-lg index-button-signup">Sair</a>
+                <!-- <a href="./signup.html" class="btn btn-lg index-button-signup">Cadastre-se</a> -->
+            </div>
+        </div>
+        <div class="container-button-login">
+            <div>
+                <a th:href="@{/myworkout}" class="btn btn-lg btn-secondary">Voltar</a>
+                <!-- <a href="./login.html" class="btn btn-lg btn-secondary">Login</a> -->
+            </div>
+        </div>
+    </div>
+<!--    <div>-->
+<!--        <button type="button" onclick="handleForm()" class="btn btn-primary">Pedir Panturrilha e Coxa</button>-->
+<!--    </div>-->
     <script>
 		function handleForm() {
 			let data = ["0000000001", "2200076425"];
