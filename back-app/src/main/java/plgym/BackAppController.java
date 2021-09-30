@@ -10,6 +10,8 @@ import java.lang.Long;
 import java.security.Principal;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,7 +83,6 @@ public class BackAppController
 	@GetMapping("/user")
 	public User getUser(Principal principal)
 	{
-		
 		for (User u : userDB.getMap().values()) {
 			if(u.getEmail().contains(principal.getName())){
 				// System.out.println();
@@ -89,17 +90,15 @@ public class BackAppController
 			}
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
-		
 	}
 
 	@PostMapping("/user")
 	public User postUser(@RequestBody User newUser)
 	{
-		// User newUser = new User(email, password);
-		System.out.println(newUser);
 		String newId = userDB.getNewId();
 		System.out.println(newId + " " + newUser.getEmail() + " " + newUser.getPassword());
 		userDB.addPair(newId, newUser);
+		System.out.println(userDB.getValue(newId));
 		return newUser;
 	}
 
@@ -109,10 +108,6 @@ public class BackAppController
 	{
 		for (User u : userDB.getMap().values()) {
 			if(u.getEmail().contains(principal.getName())){
-				System.out.println(u.getExercisesId());
-				if(u.getExercisesId() == null){
-					u.constructExerciseId();
-				}
 				for (String exerciseId : exercisesId) {
 					u.addExerciseId(exerciseId);
 				}
@@ -121,8 +116,6 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
 	}
-
-
 
 	// // Quando um usuário criar sua lista de exercicio existente?
 	// @PutMapping("/exercises/{id}")

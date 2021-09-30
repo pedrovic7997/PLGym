@@ -14,8 +14,8 @@ import plgym.domain.User;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter
+{
     @Bean
     public static BCryptPasswordEncoder passwordEncoder()
     {
@@ -57,6 +57,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorities("USER");
         }
     }
-
-
 }
