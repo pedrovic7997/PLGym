@@ -26,6 +26,7 @@ import plgym.domain.Exercise;
 import plgym.domain.ExerciseList;
 import plgym.domain.User;
 import plgym.domain.UserList;
+import plgym.util.Persistence;
 
 @RestController
 public class BackAppController
@@ -103,8 +104,23 @@ public class BackAppController
 		return newUser;
 	}
 
+	@PutMapping("/user")
+	public User putUser(@RequestBody User modifiedUser, Principal principal)
+	{
+		User user = userDB.getValue(principal.getName());
+		System.out.println(modifiedUser);
+		if(user != null){
+			userDB.removePair(principal.getName());
+			user = (User) Persistence.partialUpdate(user, modifiedUser);
+			userDB.addPair(user.getEmail(), user);
+			printAll();
+			return user;
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
+	}
+
 	@PutMapping("/user/exercises")
-	public User putUser(@RequestBody String[] exercisesId, Principal principal)
+	public User putUserExercises(@RequestBody String[] exercisesId, Principal principal)
 	{
 		User user = userDB.getValue(principal.getName());
 		if(user != null){
@@ -115,6 +131,7 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
 	}
+
 
 	// // Quando um usuário criar sua lista de exercicio existente?
 	// @PutMapping("/exercises/{id}")
