@@ -30,8 +30,8 @@ import plgym.domain.UserList;
 @RestController
 public class BackAppController
 {
-  	private static final String filePath = "/home/pedro/IdeaProjects/PLGym/back-app/src/main/resources/data/";
-//	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+//  	private static final String filePath = "/home/pedro/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
 	private static final String userDbFileName = "users.json";
 	private static final String exerciseDbFileName = "exercises.json";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
