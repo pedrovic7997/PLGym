@@ -16,4 +16,9 @@ public class ExerciseList extends DataList<Exercise>
     {
         super(PATH_TO_FILE, new TypeToken<Map<String, Exercise>>() {});
     }
+
+    public ExerciseList(String[] ids, DataList<Exercise> database, TypeToken<Map<String, Exercise>> mapType)
+    {
+        super(ids, database, new TypeToken<Map<String, Exercise>>() {});
+    }
 }

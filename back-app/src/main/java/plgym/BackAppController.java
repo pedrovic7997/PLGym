@@ -31,19 +31,12 @@ import plgym.util.Persistence;
 @RestController
 public class BackAppController
 {
-  	private static final String filePath = "/home/pedro/IdeaProjects/PLGym/back-app/src/main/resources/data/";
-//	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+//  	private static final String filePath = "/home/pedro/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
 	private static final String userDbFileName = "users.json";
 	private static final String exerciseDbFileName = "exercises.json";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
     public static UserList userDB = new UserList(filePath + userDbFileName);
-
-
-    // TODO POST para adicionar um exercício na lista de exercícios dinâmica de um usuário, seguido de serialização na mesma função
-
-    // TODO DELETE para remover um exercício na lista de exercícios dinâmica de um usuário, seguido de serialização na mesma função
-
-    // TODO Pensar em uma forma de não modificar json toda hora (botão de salvar na seção "My Workout" enviando a lista modificada)
 
     @GetMapping("/exercises")
 	public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer, Principal principal)
@@ -60,48 +53,34 @@ public class BackAppController
 		return filteredExercises;
 	}
 
-	// Fazer o exercicio tb estar ciente do ID?
 	@GetMapping("/exercises/{id}")
 	public Exercise getExercise(@PathVariable(name = "id") long id)
 	{
 		if (exerciseDB.getValue(Long.toString(id)) == null)
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado");
 		else
 			return exerciseDB.getValue(Long.toString(id));
 	}
 
-	// Fazer o user estar ciente do proprio ID?
-	// @GetMapping("/user/{id}")
-	// public User getUser(@PathVariable(name = "id") long id)
-	// {
-	// 	if (userDB.getValue(Long.toString(id)) == null)
-	// 	throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
-	// 	else
-	// 	return userDB.getValue(Long.toString(id));
-
-	// }
-
 	@GetMapping("/user")
 	public User getUser(Principal principal)
 	{
-		for (User u : userDB.getMap().values()) {
-			if(u.getEmail().contains(principal.getName())){
-				return u;
-			}
+		User user = userDB.getValue(principal.getName());
+		if(user != null) {
+			return user;
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
 	}
 
 	@PostMapping("/user")
-	public User postUser(@RequestBody User newUser)
+	public void postUser(@RequestBody User newUser)
 	{
 //		String newId = userDB.getNewId();
 //		System.out.println(newId + " " + newUser.getEmail() + " " + newUser.getPassword());
 		userDB.addPair(newUser.getEmail(), newUser);
 		System.out.println(userDB.getValue(newUser.getEmail()));
-		String json = userDB.toJson();
-		serializeJson(json, userDbFileName);
-		return newUser;
+		serializeJson(userDB.toJson(), userDbFileName);
+		throw new ResponseStatusException(HttpStatus.OK, "Usuário cadastrado");
 	}
 
 	@PutMapping("/user")
@@ -120,16 +99,27 @@ public class BackAppController
 	}
 
 	@PutMapping("/user/exercises")
-	public User putUserExercises(@RequestBody String[] exercisesId, Principal principal)
+	public void putExercise(@RequestBody String exerciseId, Principal principal)
 	{
 		User user = userDB.getValue(principal.getName());
-		if(user != null){
-			for (String exerciseId : exercisesId) {
-				user.addExerciseId(exerciseId);
-			}
-			return user;
+		if(user != null) {
+			user.addExerciseId(exerciseId.replace("\"", ""));
+			serializeJson(userDB.toJson(), userDbFileName);
+			throw new ResponseStatusException(HttpStatus.OK, "Exercício adicionado");
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+	}
+
+	@DeleteMapping("/user/exercises")
+	public void deleteExercise(@RequestBody String exerciseId, Principal principal)
+	{
+		User user = userDB.getValue(principal.getName());
+		if(user != null) {
+			user.removeExerciseId(exerciseId.replace("\"", ""));
+			serializeJson(userDB.toJson(), userDbFileName);
+			throw new ResponseStatusException(HttpStatus.OK, "Exercício removido");
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
 	}
 
 
@@ -144,20 +134,6 @@ public class BackAppController
 	// 	return c;
 	// }
 
-	// @DeleteMapping("/exercises/{id}")
-	// public void deleteContato(@PathVariable(name = "id") long id) {
-		// 	agenda.remove(id);
-		// }
-
-	// @PostMapping("/exercises")
-	// public Contato postContato(@RequestBody Contato c) {
-		// 	c.setId(nextId);
-		// 	agenda.put(nextId, c);
-		// 	nextId++;
-		// 	return c;
-		// }
-
-
 	public static String printAll()
 	{
 		String ex = "";
@@ -170,9 +146,8 @@ public class BackAppController
 
 	public void serializeJson(String json, String fileName)
 	{
-		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new FileWriter(filePath + fileName));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(filePath + fileName));
 			writer.write(json);
 			writer.close();
 		} catch (IOException e) {

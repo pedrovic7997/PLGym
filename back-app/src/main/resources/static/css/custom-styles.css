@@ -18,7 +18,7 @@
     height: 100%;
 }
 
-/**** BOTÕES ****/
+/**** BUTTONS ****/
 
 .index-buttons {
     display: flex;
@@ -54,6 +54,9 @@
     background-color: #0b5ed7;
     border-color: #0a58ca;
 }
+.bg-info {
+    --bs-bg-opacity: 0.25;
+}
 .edit-button {
     border: 0;
     background: transparent;
@@ -74,6 +77,12 @@
 /**** MY WORKOUT ****/
 
 .table-myworkout {
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.table-discover {
     padding-top: 50px;
     padding-left: 50px;
     padding-right: 50px;

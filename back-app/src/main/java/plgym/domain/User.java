@@ -64,12 +64,6 @@ public class User {
     public void setPassword( String password ) { this.password = password; }
     public void setHeight( String height ) { this.height = height; }
     public void setWeight( String weight ) { this.weight = weight; }
-//    public void setExerciseIdList( String[] exercises ) {
-//        this.exerciseIdList = new HashSet<>();
-//        for (String exercise : exercises) {
-//            this.exerciseIdList.add(exercise);
-//        }
-//    }
 
     public void addExerciseId( String exerciseId ) { this.exerciseIdList.add(exerciseId); }
     public void removeExerciseId( String exerciseId ) { this.exerciseIdList.remove(exerciseId); }
