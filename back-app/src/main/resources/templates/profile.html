@@ -75,112 +75,120 @@
 
             <!-- Page content-->
             <div class="container-fluid">
+                <h1 class="mt-4">Perfil</h1>
                 <div th:if="${param.error}">
                     <div class="alert alert-danger" role="alert">
                         E-mail já cadastrado!
                     </div>
                 </div>
                 <!-- <form th:action="@{/signup}" method="post"> -->
-                <div class="container-lg form-profile">
+                <div class="form-profile">
                     <form>
 
-                            <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
-                                <div class="col-auto">
-                                    <label for="inputName" class="col-form-label">Nome</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputName" class="form-control" disabled="true"
-                                           aria-describedby="nameInline" th:placeholder="${user.getName()}">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
-                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-                                    </button>
-                                </div>
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="inputName" class="col-form-label">Nome</label>
                             </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputName" class="form-control" disabled="disabled"
+                                       aria-describedby="nameInline" th:placeholder="${user.getName()}">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
 
-                        <div class="form-row-profile align-items-end flex-column">
-                            <div class="mb-3 row g-3 align-items-center">
-                                <div class="col-auto">
-                                    <label for="inputWeight" class="col-form-label">Peso</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputWeight" class="form-control" disabled="true"
-                                           aria-describedby="weightInline" th:placeholder="${user.getWeight()}">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
-                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-                                    </button>
-                                </div>
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="inputWeight" class="col-form-label">Peso</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputWeight" class="form-control" disabled="disabled"
+                                       aria-describedby="weightInline" th:placeholder="${user.getWeight()}">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
                             </div>
                         </div>
-                        <div class="form-row-profile align-items-end flex-column">
-                            <div class="mb-3 row g-3 align-items-center">
-                                <div class="col-auto">
-                                    <label for="inputHeight" class="col-form-label">Altura</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputHeight" class="form-control" disabled="true"
-                                    aria-describedby="heightInline" th:placeholder="${user.getWeight()}">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
-                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-                                    </button>
-                                </div>
+
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="inputHeight" class="col-form-label">Altura</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputHeight" class="form-control" disabled="disabled"
+                                aria-describedby="heightInline" th:placeholder="${user.getWeight()}">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
                             </div>
                         </div>
-                        <div class="form-row-profile align-items-end flex-column">
-                            <div class="mb-3 row g-3 align-items-center">
-                                <div class="col-auto">
-                                    <label for="inputBirthdate" class="col-form-label">Data de Nascimento</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputBirthdate" class="form-control" disabled="true"
-                                           aria-describedby="bithdateInline" th:placeholder="${user.getBirthdate()}">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
-                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-                                    </button>
-                                </div>
+
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="inputBirthdate" class="col-form-label">Data de Nascimento</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputBirthdate" class="form-control" disabled="disabled"
+                                       aria-describedby="bithdateInline" th:placeholder="${user.getBirthdate()}">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
                             </div>
                         </div>
-                        <div class="form-row-profile align-items-end flex-column">
-                            <div class="mb-3 row g-3 align-items-center">
-                                <div class="col-auto">
-                                    <label for="inputEmail" class="col-form-label">Email</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputEmail" class="form-control" disabled="true"
-                                           aria-describedby="emailInline" th:placeholder="${user.getEmail()}">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
-                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-                                    </button>
-                                </div>
+
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="inputEmail" class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputEmail" class="form-control" disabled="disabled"
+                                       aria-describedby="emailInline" th:placeholder="${user.getEmail()}">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
                             </div>
                         </div>
-                        <div class="form-row-profile align-items-end flex-column">
-                            <div class="mb-3 row g-3 align-items-center">
-                                <div class="col-auto">
-                                    <label for="inputPassword" class="col-form-label">Senha</label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="text" id="inputPassword" class="form-control" disabled="true"
-                                           aria-describedby="passwordInline" th:placeholder="${user.getPassword()}">
-                                </div>
-                                <div class="col-auto">
-                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
-                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-                                    </button>
-                                </div>
+
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="inputPassword" class="col-form-label">Senha</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputPassword" class="form-control" disabled="disabled"
+                                       aria-describedby="passwordInline" placeholder="******">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
                             </div>
                         </div>
+
                         <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
-                        <button type="button" onclick="handleForm()" class="btn btn-primary">Alterar</button>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="button" onclick="handleForm()" class="btn btn-primary form-button-profile" disabled="disabled">Alterar</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
