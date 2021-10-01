@@ -57,6 +57,10 @@
 .bg-info {
     --bs-bg-opacity: 0.25;
 }
+.edit-button {
+    border: 0;
+    background: transparent;
+}
 
 /**** LOGIN ****/
 
@@ -91,6 +95,17 @@
     width: 40%;
 }
 
-.form-button-profile {
+.form-button-container {
+    display: flex;
+    justify-content:left;
+}
+
+.form-button {
     text-align: center;
+    padding: 20px;
+}
+
+.form-cancel-edit-button {
+    text-align: center;
+    padding: 20px;
 }

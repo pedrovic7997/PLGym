@@ -8,14 +8,14 @@ public class User {
     private String birthdate;
     private String email;
     private String password;
-    private double height;
-    private double weight;
+    private String height;
+    private String weight;
     private Set<String> exerciseIdList = new HashSet<>();
 
     public User(){}
 
     public User( String name, String birthdate, String email, String password,
-                  double height, double weight)
+                  String height, String weight)
      {
          super();
          this.name = name;
@@ -27,7 +27,7 @@ public class User {
      }
 
     public User( String name, String birthdate, String email, String password,
-                 double height, double weight, Set<String> exercises)
+                 String height, String weight, Set<String> exercises)
     {
         this.name = name;
         this.birthdate = birthdate;
@@ -39,7 +39,7 @@ public class User {
     }
 
     public User( String name, String birthdate, String email, String password,
-                 double height, double weight, String[] exercises)
+                 String height, String weight, String[] exercises)
     {
         this.name = name;
         this.birthdate = birthdate;
@@ -57,13 +57,13 @@ public class User {
     public String getBirthdate() { return this.birthdate; }
     public String getEmail() { return this.email; }
     public String getPassword() { return this.password; }
-    public double getHeight() { return this.height;}
-    public double getWeight() { return this.weight; }
+    public String getHeight() { return this.height;}
+    public String getWeight() { return this.weight; }
     public Set<String> getExercisesId() { return this.exerciseIdList; }
 
     public void setPassword( String password ) { this.password = password; }
-    public void setHeight( double height ) { this.height = height; }
-    public void setWeight( double weight ) { this.weight = weight; }
+    public void setHeight( String height ) { this.height = height; }
+    public void setWeight( String weight ) { this.weight = weight; }
 
     public void addExerciseId( String exerciseId ) { this.exerciseIdList.add(exerciseId); }
     public void removeExerciseId( String exerciseId ) { this.exerciseIdList.remove(exerciseId); }
