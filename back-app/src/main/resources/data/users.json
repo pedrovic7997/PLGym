@@ -1,18 +1,1 @@
-{
-  "1651210668": {
-    "weight":70.2,
-    "password":"senha",
-    "name":"fulano",
-    "height":126.0,
-    "email":"fulano@gmail.com",
-    "birthdate":"05/10/1992"
-  },
-  "7140225689": {
-    "weight":99.5,
-    "password":"hbuoavdfuiyryuiq",
-    "name":"sicrano",
-    "height":180.58,
-    "email":"sicrano@gmail.com",
-    "birthdate":"20/07/1979"
-  }
-}
+{"sicrano@gmail.com":{"name":"Sicrano da Silva","birthdate":"14/09/1999","email":"sicrano@gmail.com","password":"senha","height":1.8,"weight":100.0,"exerciseIdList":[]},"fulano@gmail.com":{"name":"fulano","birthdate":"123","email":"fulano@gmail.com","password":"senha","height":123.0,"weight":123.0,"exerciseIdList":[]}}

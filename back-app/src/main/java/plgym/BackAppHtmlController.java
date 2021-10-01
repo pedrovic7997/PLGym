@@ -26,7 +26,7 @@ public class BackAppHtmlController
     }
 
 	@RequestMapping("/myworkout")
-    public String myWorkout(Model model)
+    public String myWorkout(Model model, Principal principal)
 	{
 		model.addAttribute("exerciseDB", BackAppController.exerciseDB);
         return "myworkout";
@@ -51,8 +51,9 @@ public class BackAppHtmlController
 	}
 
 	@RequestMapping("/profile")
-	public String profile()
+	public String profile(Model model, Principal principal)
 	{
+		model.addAttribute("user", BackAppController.userDB.getValue(principal.getName()));
 		return "profile";
 	}
 }

@@ -6,7 +6,6 @@ import plgym.domain.subdomain.Category;
 import plgym.domain.subdomain.Difficulty;
 
 import java.util.Map;
-import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

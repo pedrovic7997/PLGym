@@ -66,3 +66,22 @@
 .login-container-box {
     width: 500px;
 }
+
+/**** MY WORKOUT ****/
+
+.table-myworkout {
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+/**** PROFILE ****/
+
+.form-profile {
+    padding-top: 50px;
+    width: 40%;
+}
+
+.form-row-profile {
+
+}

@@ -1,24 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PLGym - Perfil</title>
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link th:rel="stylesheet" th:href="@{/css/styles.css}" />
+
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom-styles.css}">
     <!--<link rel="stylesheet" href="../static/css/custom-styles.css"> -->
+
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light">PLGym Logo</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/myworkout">
+                    Meu Treino
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/discover">
+                    Busque Exercícios
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/suggestions">
+                    Sugestões
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/profile">
+                    Perfil
+                </a>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link dropdown-toggle"
+                                   id="navbarDropdown"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    Opções
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="http://localhost:8080/logout">
+                                        Sair
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
-    <div class="login-container">
-        <div class="login-container-box">
+            <!-- Page content-->
             <div class="container-fluid">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger" role="alert">
@@ -26,49 +81,109 @@
                     </div>
                 </div>
                 <!-- <form th:action="@{/signup}" method="post"> -->
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nome</label>
-                        <input type="name" name="name" class="form-control" id="name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="weight" class="form-label">Peso (Opcional)</label>
-                        <input type="weight" name="weight" class="form-control" id="weight">
-                    </div>
-                    <div class="mb-3">
-                        <label for="height" class="form-label">Altura (Opcional)</label>
-                        <input type="height" name="height" class="form-control" id="height">
-                    </div>
-                    <div class="mb-3">
-                        <label for="birthdate" class="form-label">Data de Nascimento</label>
-                        <input type="birthdate" name="birthdate" class="form-control" id="birthdate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">E-Mail</label>
-                        <input type="email" name="email" class="form-control" id="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" name="password" class="form-control" id="password">
-                    </div>
-                    <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
-                    <button type="button" onclick="handleForm()" class="btn btn-primary">Cadastrar</button>
-                </form>
-            </div>
-        </div>
-    </div>
+                <div class="container-lg form-profile">
+                    <form>
 
-    <div class="row g-3 align-items-center">
-        <div class="col-auto">
-            <label for="inputPassword6" class="col-form-label">Password</label>
-        </div>
-        <div class="col-auto">
-            <input type="password" id="inputPassword6" class="form-control" disabled="true" aria-describedby="passwordHelpInline" placeholder="">
-        </div>
-        <div class="col-auto">
-            <button type="submit" style="border: 0; background: transparent" onclick="handleEdit()">
-                <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
-            </button>
+                            <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                                <div class="col-auto">
+                                    <label for="inputName" class="col-form-label">Nome</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="inputName" class="form-control" disabled="true"
+                                           aria-describedby="nameInline" th:placeholder="${user.getName()}">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                    </button>
+                                </div>
+                            </div>
+
+                        <div class="form-row-profile align-items-end flex-column">
+                            <div class="mb-3 row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="inputWeight" class="col-form-label">Peso</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="inputWeight" class="form-control" disabled="true"
+                                           aria-describedby="weightInline" th:placeholder="${user.getWeight()}">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row-profile align-items-end flex-column">
+                            <div class="mb-3 row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="inputHeight" class="col-form-label">Altura</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="inputHeight" class="form-control" disabled="true"
+                                    aria-describedby="heightInline" th:placeholder="${user.getWeight()}">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row-profile align-items-end flex-column">
+                            <div class="mb-3 row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="inputBirthdate" class="col-form-label">Data de Nascimento</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="inputBirthdate" class="form-control" disabled="true"
+                                           aria-describedby="bithdateInline" th:placeholder="${user.getBirthdate()}">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row-profile align-items-end flex-column">
+                            <div class="mb-3 row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="inputEmail" class="col-form-label">Email</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="inputEmail" class="form-control" disabled="true"
+                                           aria-describedby="emailInline" th:placeholder="${user.getEmail()}">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row-profile align-items-end flex-column">
+                            <div class="mb-3 row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="inputPassword" class="col-form-label">Senha</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" id="inputPassword" class="form-control" disabled="true"
+                                           aria-describedby="passwordInline" th:placeholder="${user.getPassword()}">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" style="border: 0; background: transparent" onclick="handleEdit()">
+                                        <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
+                        <button type="button" onclick="handleForm()" class="btn btn-primary">Alterar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -92,7 +207,7 @@
     <script>
 		function handleForm() {
 			let data = ["0000000001", "2200076425"];
-			$.ajax("http://localhost:8080/user", {
+			$.ajax("http://localhost:8080/user/exercises", {
 				type : 'PUT',
 				contentType : 'application/json',
 				data : JSON.stringify(data),

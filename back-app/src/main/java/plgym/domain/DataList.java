@@ -39,7 +39,6 @@ public class DataList<T>
             }
         } else {
             try {
-                file.createNewFile();
                 map = new HashMap<>();
                 
                 Gson gson = new Gson();

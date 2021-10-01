@@ -3,8 +3,8 @@ package plgym;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
 
 import java.lang.Long;
 import java.security.Principal;
@@ -30,8 +30,8 @@ import plgym.domain.UserList;
 @RestController
 public class BackAppController
 {
-  	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
-	// private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+//  	private static final String filePath = "/home/pedro/Documents/2021-1/PI/Trabalho/Implementação/PLGym/back-app/src/main/resources/data/";
+	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
 	private static final String userDbFileName = "users.json";
 	private static final String exerciseDbFileName = "exercises.json";
     public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
@@ -52,7 +52,7 @@ public class BackAppController
 		for (String id : exerciseDB.getMap().keySet())
 		{
 			Exercise exercise = exerciseDB.getValue(id);
-			if (exercise.getName().contains(exer)){
+			if (exercise.getName().contains(exer)) {
 				filteredExercises.addPair(id, exercise);
 			}
 		}
@@ -64,9 +64,9 @@ public class BackAppController
 	public Exercise getExercise(@PathVariable(name = "id") long id)
 	{
 		if (exerciseDB.getValue(Long.toString(id)) == null)
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
 		else
-		return exerciseDB.getValue(Long.toString(id));
+			return exerciseDB.getValue(Long.toString(id));
 	}
 
 	// Fazer o user estar ciente do proprio ID?
@@ -85,7 +85,6 @@ public class BackAppController
 	{
 		for (User u : userDB.getMap().values()) {
 			if(u.getEmail().contains(principal.getName())){
-				// System.out.println();
 				return u;
 			}
 		}
@@ -95,24 +94,24 @@ public class BackAppController
 	@PostMapping("/user")
 	public User postUser(@RequestBody User newUser)
 	{
-		String newId = userDB.getNewId();
-		System.out.println(newId + " " + newUser.getEmail() + " " + newUser.getPassword());
-		userDB.addPair(newId, newUser);
-		System.out.println(userDB.getValue(newId));
+//		String newId = userDB.getNewId();
+//		System.out.println(newId + " " + newUser.getEmail() + " " + newUser.getPassword());
+		userDB.addPair(newUser.getEmail(), newUser);
+		System.out.println(userDB.getValue(newUser.getEmail()));
+		String json = userDB.toJson();
+		serializeJson(json, userDbFileName);
 		return newUser;
 	}
 
-	@PutMapping("/user")
-	public User putUser(@RequestBody String[] exercisesId,
-						Principal principal)
+	@PutMapping("/user/exercises")
+	public User putUser(@RequestBody String[] exercisesId, Principal principal)
 	{
-		for (User u : userDB.getMap().values()) {
-			if(u.getEmail().contains(principal.getName())){
-				for (String exerciseId : exercisesId) {
-					u.addExerciseId(exerciseId);
-				}
-				return u;
+		User user = userDB.getValue(principal.getName());
+		if(user != null){
+			for (String exerciseId : exercisesId) {
+				user.addExerciseId(exerciseId);
 			}
+			return user;
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
 	}
@@ -151,7 +150,6 @@ public class BackAppController
 		}
 		return ex;
 	}
-
 
 	public void serializeJson(String json, String fileName)
 	{

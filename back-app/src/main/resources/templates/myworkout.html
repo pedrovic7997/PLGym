@@ -8,29 +8,30 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
 
-    <!-- Core Theme CSS -->
-    <link th:rel="stylesheet" th:href="@{/css/styles.css}" />
-
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/custom-styles.css}" />
     <!-- <link rel="stylesheet" href="../static/css/custom-styles.css"> -->
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS/JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
           crossorigin="anonymous"/>
+    <link th:rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- DataTables -->
-    <link href="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
-          rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"
-          rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
 </head>
 <body>
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">PLGym Logo</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
@@ -80,45 +81,41 @@
             </nav>
             <!-- Page content-->
             <div class="container-fluid">
-                <h1 class="mt-4">Exercícios</h1>
+                <h1 class="mt-4">Treino</h1>
                 <p>Esta é a sua lista atual de exercícios</p>
-                <div class="table-responsive">
-                    <table class="table table-borderless table-hover">
-                        <thead class="table-light">
+                <!-- Exercises table -->
+                <div class="table-responsive table-myworkout">
+                <!--<table class="table table-hover">-->
+                    <table id="table-myworkout" class="display" style="width:100%">
+                    <!--<thead class="table-light">-->
+                        <thead>
                             <tr>
+                                <th></th>
                                 <th>Exercício</th>
                                 <th>Categoria</th>
                                 <th>Dificuldade</th>
                                 <th>Link</th>
                             </tr>
                         </thead>
-                        <tr data-th-each="exercise : ${exerciseDB.getMap().values()}">
-                            <td data-th-text="${exercise.getName()}">...</td>
-                            <td data-th-text="${exercise.getCategory()}">...</td>
-                            <td data-th-text="${exercise.getDifficulty()}">...</td>
-                            <td>
-                                <a href=""
-                                   data-th-href="@{https://google.com/search?q={link}(link=${exercise.getLinkYT()})}"
-                                   data-th-text="${exercise.getLinkYT()}">
-                                    ...
-                                </a>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr data-th-each="exercise : ${exerciseDB.getMap().values()}">
+                                <td data-th-text="${exercise.getName()}">...</td>
+                                <td data-th-text="${exercise.getCategory()}">...</td>
+                                <td data-th-text="${exercise.getDifficulty()}">...</td>
+                                <td>
+                                    <a href=""
+                                       data-th-href="@{https://google.com/search?q={link}(link=${exercise.getLinkYT()})}"
+                                       data-th-text="YouTube">
+                                        ...
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core theme JS-->
-    <script th:src="@{/js/scripts.js}"></script>
-    <!-- <script src="../static/js/scripts.js"></script> -->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    <script th:src="@{/js/tables.js}"></script>
 </body>
 </html>
