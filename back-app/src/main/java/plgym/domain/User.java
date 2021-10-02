@@ -64,6 +64,9 @@ public class User {
     public void setPassword( String password ) { this.password = password; }
     public void setHeight( String height ) { this.height = height; }
     public void setWeight( String weight ) { this.weight = weight; }
+    public void setName( String name ) { this.name = name; }
+    public void setBirthdate( String birthdate ) { this.birthdate = birthdate; }
+    public void setEmail( String email ) { this.email = email; }
 
     public void addExerciseId( String exerciseId ) { this.exerciseIdList.add(exerciseId); }
     public void removeExerciseId( String exerciseId ) { this.exerciseIdList.remove(exerciseId); }

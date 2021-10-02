@@ -83,14 +83,11 @@ public class BackAppController
 	public User putUser(@RequestBody User modifiedUser, Principal principal)
 	{
 		User user = userDB.getValue(principal.getName());
-		System.out.println(modifiedUser);
 		if(user != null){
 			userDB.removePair(principal.getName());
 			user = (User) Persistence.partialUpdate(user, modifiedUser);
 			userDB.addPair(user.getEmail(), user);
 			serializeJson(userDB.toJson(), userDbFileName);
-			System.out.println(user);
-			printAll();
 			return user;
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
