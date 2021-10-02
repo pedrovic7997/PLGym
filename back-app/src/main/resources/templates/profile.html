@@ -25,7 +25,9 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-light">PLGym Logo</div>
+            <div class="sidebar-heading border-bottom bg-info bg-gradient logo-container" style="--bs-bg-opacity: 0.25;">
+                <img th:src="@{/assets/logo.svg}" id="logo" alt="PLGym Logo" src="">
+            </div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                    href="http://localhost:8080/myworkout">
@@ -36,10 +38,6 @@
                     Busque Exercícios
                 </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                   href="http://localhost:8080/suggestions">
-                    Sugestões
-                </a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"
                    href="http://localhost:8080/profile">
                     Perfil
                 </a>
@@ -48,43 +46,40 @@
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
             <!-- Top navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle"
-                                   id="navbarDropdown"
-                                   href="#"
-                                   role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">
-                                    Opções
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="http://localhost:8080/logout">
-                                        Sair
+            <div class="bg-info bg-gradient text-dark" style="--bs-bg-opacity: 0.25;">
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle"
+                                       id="navbarDropdown"
+                                       href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <img th:src="@{/assets/options_icon.svg}" alt="Options icon" src="">
                                     </a>
-                                </div>
-                            </li>
-                        </ul>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="http://localhost:8080/logout">
+                                            Sair
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
 
             <!-- Page content-->
             <div class="container-fluid">
-                <h1 class="mt-4">Perfil</h1>
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger" role="alert">
-                        E-mail já cadastrado!
-                    </div>
-                </div>
-                <!-- <form th:action="@{/signup}" method="post"> -->
+                <h1 class="mt-4 text-center fw-bolder">
+                    Perfil
+                </h1>
                 <div class="form-profile">
                     <form id="profile-form">
-
                         <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
                             <div class="col-auto">
                                 <label for="input-name" class="col-form-label">Nome</label>
@@ -99,7 +94,6 @@
                                 </button>
                             </div>
                         </div>
-
 
                         <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
                             <div class="col-auto">
@@ -116,7 +110,6 @@
                             </div>
                         </div>
 
-
                         <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
                             <div class="col-auto">
                                 <label for="input-height" class="col-form-label">Altura (cm)</label>
@@ -131,7 +124,6 @@
                                 </button>
                             </div>
                         </div>
-
 
                         <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
                             <div class="col-auto">
@@ -149,7 +141,6 @@
                             </div>
                         </div>
 
-
                         <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
                             <div class="col-auto">
                                 <label for="input-email" class="col-form-label">Email</label>
@@ -164,7 +155,6 @@
                                 </button>
                             </div>
                         </div>
-
 
                         <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
                             <div class="col-auto">
@@ -182,17 +172,13 @@
                         </div>
 
                         <div class="container form-button-container">
-                            <!-- <div class="row"> -->
-                                <div class="text-center form-button">
-                                    <button id="save-edit" type="button" onclick="handleForm()" class="btn btn-primary" disabled="true">Salvar alterações</button>
-                                </div>
-                                <div class="text-center form-button">
-                                    <button id="cancel-edit" type="button" onclick="resetFields()" class="btn btn-danger">Cancelar alterações</button>
-                                </div>
-                            <!-- </div> -->
+                            <div class="text-center form-button">
+                                <button id="save-edit" type="button" onclick="handleForm()" class="btn btn-primary" disabled="true">Salvar alterações</button>
+                            </div>
+                            <div class="text-center form-button">
+                                <button id="cancel-edit" type="button" onclick="resetFields()" class="btn btn-danger">Cancelar alterações</button>
+                            </div>
                         </div>
-
-                        <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
 
                     </form>
                 </div>
@@ -234,7 +220,7 @@
 			});
 		}
 
-        function enableText(elementId, buttonId) {
+        function enableText(elementId) {
 			document.getElementById(elementId).disabled = false;
             document.getElementById("save-edit").disabled = false;
 		}

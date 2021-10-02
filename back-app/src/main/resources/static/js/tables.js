@@ -47,7 +47,7 @@ $(document).ready(function() {
             dataType : 'json',
             async : false,
             success : function() {
-                window.location.href = 'http://localhost:8080/discover';
+                window.location.href = 'http://localhost:8080/myworkout';
             },
         });
     } );

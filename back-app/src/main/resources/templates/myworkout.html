@@ -32,7 +32,9 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-info bg-gradient" style="--bs-bg-opacity: 0.25;">PLGym Logo</div>
+            <div class="sidebar-heading border-bottom bg-info bg-gradient logo-container" style="--bs-bg-opacity: 0.25;">
+                <img th:src="@{/assets/logo.svg}" id="logo" alt="PLGym Logo" src="">
+            </div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                    href="http://localhost:8080/myworkout">
@@ -41,10 +43,6 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                    href="http://localhost:8080/discover">
                     Busque Exercícios
-                </a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                   href="http://localhost:8080/suggestions">
-                    Sugestões
                 </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                    href="http://localhost:8080/profile">
@@ -68,7 +66,7 @@
                                        data-bs-toggle="dropdown"
                                        aria-haspopup="true"
                                        aria-expanded="false">
-                                        Opções
+                                        <img th:src="@{/assets/options_icon.svg}" alt="Options icon" src="">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="http://localhost:8080/logout">
@@ -118,10 +116,6 @@
                                 <td>
                                     <button type="button" class="btn">
                                         <img src="" th:src="@{/assets/remove_icon.svg}" alt="Remove icon">
-                                        <a about="remove_icon.svg"
-                                           rel="license"
-                                           href="https://creativecommons.org/licenses/by-nc/3.0/">
-                                        </a>
                                     </button>
                                 </td>
                             </tr>
