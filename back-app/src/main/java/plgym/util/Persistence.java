@@ -19,7 +19,6 @@ public class Persistence {
         return Stream.of(wrappedSource.getPropertyDescriptors())
                 .map(FeatureDescriptor::getName)
                 .filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == null)
-                // .filter(propertyName -> (Double) wrappedSource.getPropertyValue(propertyName) == 0)
                 .toArray(String[]::new);
     }
 }

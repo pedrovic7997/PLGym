@@ -1,15 +1,15 @@
 {
   "0000000001": {
-    "linkYT":"www.link.com/1",
-    "name":"Panturrilha",
-    "mets":4.2,
-    "difficulty":"DIFICIL",
+    "linkYT":"https://youtu.be/h7bZ4XbuZLg",
+    "name":"Panturrilha em pé",
+    "mets":1.0,
+    "difficulty":"FACIL",
     "category":"PANTURRILHA"
   },
   "2200076425": {
-    "linkYT":"www.link.com/2",
+    "linkYT":"https://youtu.be/Ufh39C5cMfU",
     "name":"Agachamento",
-    "mets":1.0,
+    "mets":3.5,
     "difficulty":"MEDIO",
     "category":"COXA"
   }

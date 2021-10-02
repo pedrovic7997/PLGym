@@ -3,15 +3,11 @@ package plgym;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.LinkedList;
 
 import java.lang.Long;
 import java.security.Principal;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -92,6 +88,8 @@ public class BackAppController
 			userDB.removePair(principal.getName());
 			user = (User) Persistence.partialUpdate(user, modifiedUser);
 			userDB.addPair(user.getEmail(), user);
+			serializeJson(userDB.toJson(), userDbFileName);
+			System.out.println(user);
 			printAll();
 			return user;
 		}
@@ -121,18 +119,6 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
 	}
-
-
-	// // Quando um usuário criar sua lista de exercicio existente?
-	// @PutMapping("/exercises/{id}")
-	// public Exercise setContato(@PathVariable(name = "id") long id, @RequestBody Exercise exercise) {
-	// 	if (exerciseDB.getValue(Long.toString(id)) == null)
-	// 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado!");
-	// 	exerciseDB.addPair(id, exercise);
-	// 	c.setId(id);
-	// 	agenda.put(id, c);
-	// 	return c;
-	// }
 
 	public static String printAll()
 	{

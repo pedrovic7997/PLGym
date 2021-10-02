@@ -108,8 +108,9 @@
                                 <td data-th-text="${exercises.getValue(id).getDifficulty()}">...</td>
                                 <td>
                                     <a href=""
-                                       data-th-href="@{https://google.com/search?q={link}(link=${exercises.getValue(id).getLinkYT()})}"
-                                       data-th-text="Vídeo">
+                                       data-th-href="${exercises.getValue(id).getLinkYT()}"
+                                       data-th-text="Vídeo"
+                                       target="_blank">
                                         ...
                                     </a>
                                 </td>
