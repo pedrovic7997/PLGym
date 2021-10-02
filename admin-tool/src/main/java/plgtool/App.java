@@ -6,7 +6,6 @@ import plgym.domain.subdomain.Category;
 import plgym.domain.subdomain.Difficulty;
 
 import java.util.Map;
-import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -114,7 +113,7 @@ public class App
         
         // Creates auxiliary exercise list with all registered exercises as objects
         ExerciseList exerciseList = new ExerciseList(PATH_TO_JSON);
-        String id = getNewId(exerciseList);
+        String id = exerciseList.getNewId();
         
         // New exercise is added to the list
         Exercise exercise = new Exercise(name, mets, difficulty, category, linkYT);
@@ -123,47 +122,6 @@ public class App
         serializeExercises(exerciseList, PATH_TO_JSON);
         
         System.out.println("\nCreated successfully. Exercise ID is " + id);
-    }
-    
-    // Returns an ID not currently in use
-    public static String getNewId(ExerciseList exerciseList)
-    {
-        Map<String, Exercise> map = exerciseList.getMap();
-        
-        String id = "";
-        boolean idExists = true;
-        
-        // If a generated ID is already in use, while loops
-        while(idExists == true) {
-            
-            int leftLimit = 48;    // char '0'
-            int rightLimit = 57;   // char '9'
-            int stringLength = 10;
-            Random random = new Random();
-
-            StringBuilder buffer = new StringBuilder(stringLength);
-            
-            // Generates string of length 10 consisting strictly of numbers 0-9
-            for (int i = 0; i < stringLength; i++) {
-                /*  (rightLimit - leftLimit + 1) is how many possible values we want;
-                    random.nextFloat() acts as a random percentage;
-                    leftLimit is a baseline to which we add the product of the above.   */
-                int randomLimitedInt = leftLimit + (int)
-                    (random.nextFloat() * (rightLimit - leftLimit + 1));
-                buffer.append((char) randomLimitedInt);
-            }
-            id = buffer.toString();
-            
-            idExists = false;
-            
-            for(String key : map.keySet()) {
-                if( id.equals(key) )
-                    idExists = true;
-                    break;
-            }
-        }
-        
-        return id;
     }
     
     private static void listAllExercises(String PATH_TO_JSON)

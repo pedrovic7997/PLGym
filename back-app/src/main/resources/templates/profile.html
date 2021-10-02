@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PLGym - Perfil</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link th:rel="stylesheet" th:href="@{/css/styles.css}" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/custom-styles.css}">
+    <!--<link rel="stylesheet" href="../static/css/custom-styles.css"> -->
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-info bg-gradient logo-container" style="--bs-bg-opacity: 0.25;">
+                <img th:src="@{/assets/logo.svg}" id="logo" alt="PLGym Logo" src="">
+            </div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/myworkout">
+                    Meu Treino
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/discover">
+                    Busque Exercícios
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="http://localhost:8080/profile">
+                    Perfil
+                </a>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <div class="bg-info bg-gradient text-dark" style="--bs-bg-opacity: 0.25;">
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item dropdown active">
+                                    <a class="nav-link dropdown-toggle"
+                                       id="navbarDropdown"
+                                       href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <img th:src="@{/assets/options_icon.svg}" alt="Options icon" src="">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="http://localhost:8080/logout">
+                                            Sair
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Page content-->
+            <div class="container-fluid">
+                <h1 class="mt-4 text-center fw-bolder">
+                    Perfil
+                </h1>
+                <div class="form-profile">
+                    <form id="profile-form">
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="input-name" class="col-form-label">Nome</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="input-name" class="form-control" disabled="true"
+                                       aria-describedby="nameInline" th:placeholder="${user.getName()}">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btn1" type="button" class="edit-button" onclick="enableText('input-name', 'btn1')">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="input-weight" class="col-form-label">Peso (kg)</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="input-weight" class="form-control" disabled="true"
+                                       aria-describedby="weightInline" th:placeholder="${user.getWeight()}">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btn2" type="button" class="edit-button" onclick="enableText('input-weight', 'btn2')">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="input-height" class="col-form-label">Altura (cm)</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" id="input-height" class="form-control" disabled="true"
+                                aria-describedby="heightInline" th:placeholder="${user.getHeight()}">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btn3" type="button" class="edit-button" onclick="enableText('input-height', 'btn3')">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="input-birthdate" class="col-form-label">Data de Nascimento</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="input-birthdate" class="form-control" disabled="true"
+                                       aria-describedby="bithdateInline" th:placeholder="${user.getBirthdate()}"
+                                       pattern="[0-9]{2}/[0-9]{2}/[1-2][0-9]{3}">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btn4" type="button" class="edit-button" onclick="enableText('input-birthdate', 'btn4')">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="input-email" class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="email" id="input-email" class="form-control" disabled="true"
+                                       aria-describedby="emailInline" th:placeholder="${user.getEmail()}">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btn5" type="button" class="edit-button" onclick="enableText('input-email', 'btn5')">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row g-3 align-items-center d-flex justify-content-end">
+                            <div class="col-auto">
+                                <label for="input-password" class="col-form-label">Senha</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="password" id="input-password" class="form-control" disabled="true"
+                                       aria-describedby="passwordInline" placeholder="******">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btn6" type="button" class="edit-button" onclick="enableText('input-password', 'btn6')">
+                                    <img src="" th:src="@{/assets/edit_icon.svg}" alt="Edit icon">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="container form-button-container">
+                            <div class="text-center form-button">
+                                <button id="save-edit" type="button" onclick="handleForm()" class="btn btn-primary" disabled="true">Salvar alterações</button>
+                            </div>
+                            <div class="text-center form-button">
+                                <button id="cancel-edit" type="button" onclick="resetFields()" class="btn btn-danger">Cancelar alterações</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div>-->
+<!--        <button type="button" onclick="handleForm()" class="btn btn-primary">Pedir Panturrilha e Coxa</button>-->
+<!--    </div>-->
+    <script>
+		function handleForm() {
+			var data = {};
+            var elements = document.querySelectorAll("#profile-form input[type='text'], input[type='number'], input[type='email'], input[type='password']");
+
+            for (let item of elements) {
+                let id = item.getAttribute("id");
+                let re = /input-(\w*)/;
+                let found = id.match(re);
+                let property = found[1];
+                // alert(found[1]);
+                if(item.value !== ""){
+                    data[property] = item.value;
+                }
+            }
+
+            console.log(data);
+
+			$.ajax("http://localhost:8080/user", {
+				type : 'PUT',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				async : false,
+				success : function() {
+					alert("Registrado com sucesso!");
+					window.location.href = '/myworkout';
+				},
+			});
+		}
+
+        function enableText(elementId) {
+			document.getElementById(elementId).disabled = false;
+            document.getElementById("save-edit").disabled = false;
+		}
+
+        function resetFields() {
+            var elements = document.querySelectorAll("#profile-form input[type='text'], input[type='number'], input[type='email'], input[type='password']");
+
+            for (let element of elements) {
+                element.setAttribute("disabled", "true");
+                element.value = "";
+            }
+
+            document.getElementById("save-edit").disabled = true;
+        }
+        
+	</script>
+</body>
+</html>
