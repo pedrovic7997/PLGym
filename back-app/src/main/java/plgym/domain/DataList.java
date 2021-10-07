@@ -25,7 +25,7 @@ public class DataList<T>
     /**
      * Creates DataList using specified file.
      * @param PATH_TO_FILE Full path to file to be opened.
-     * @param mapType TypeToken<Map<String, T>> where T is either User or Exercise.
+     * @param mapType {@code TypeToken<Map<String, T>>} where T is either User or Exercise.
      *                Necessary for gson to be able to read the JSON formatted file.
      */
     public DataList(String PATH_TO_FILE, TypeToken<Map<String, T>> mapType)
@@ -69,7 +69,7 @@ public class DataList<T>
      * Creates DataList using specified IDs.
      * @param ids Array of IDs of exercises to be added on construction.
      * @param database Instantiated database.
-     * @param mapType TypeToken<Map<String, T>> where T is either User or Exercise.
+     * @param mapType {@code TypeToken<Map<String, T>>} where T is either User or Exercise.
      *                Necessary for gson to be able to read the JSON formatted file.
      */
     public DataList(String[] ids, DataList<T> database, TypeToken<Map<String, T>> mapType)
@@ -84,7 +84,7 @@ public class DataList<T>
     
     /**
      * Creates empty DataList.
-     * @param mapType TypeToken<Map<String, T>> where T is either User or Exercise.
+     * @param mapType {@code TypeToken<Map<String, T>>} where T is either User or Exercise.
      *                Necessary for gson to be able to read the JSON formatted file.
      */
     public DataList(TypeToken<Map<String, T>> mapType)
@@ -93,8 +93,8 @@ public class DataList<T>
     }
 	
     /**
-     * Retrieves the map of <String, T> pairs DataList<T> uses.
-     * @return Map of type Map<String, T>.
+     * Retrieves the map of {@code <String, T>} pairs {@code DataList<T>} uses.
+     * @return Map of type {@code Map<String, T>}.
      */
     public Map<String, T> getMap()
     {
@@ -102,7 +102,9 @@ public class DataList<T>
     }
     
     /**
-     * Adds a pair <String, T> to the map DataList<T> uses.
+     * Adds a pair {@code <String, T>} to the map {@code DataList<T>} uses.
+     * @param id Key to be added.
+     * @param content The value to be added.
      */
     public void addPair(String id, T content)
     {
@@ -110,7 +112,7 @@ public class DataList<T>
     }
 
     /**
-     * Retrieves a value from the map DataList<T> uses associated with the specified key.
+     * Retrieves a value from the map {@code DataList<T>} uses associated with the specified key.
      * @param id Key to which the value desired is associated.
      * @return Value of type T associated with 'id'.
      */
@@ -120,7 +122,8 @@ public class DataList<T>
     }
 
     /**
-     * Removes a pair <String, T> from the map DataList<T> uses.
+     * Removes a pair {@code <String, T>} from the map {@code DataList<T>} uses.
+     * @param id Key to which the value to be deleted is associated.
      */
     public void removePair(String id)
     {
@@ -128,7 +131,7 @@ public class DataList<T>
     }
 
     /**
-     * Updates a <key, value> pair in the map DataList<T> uses.
+     * Updates a {@code <key, value>} pair in the map {@code DataList<T>} uses.
      * @param id Key to which the value to be updated is associated.
      * @param content The value with which to update the pair.
      */
@@ -138,7 +141,7 @@ public class DataList<T>
     }
 
     /**
-     * Transform the map DataList<T> uses into a JSON string.
+     * Transform the map {@code DataList<T>} uses into a JSON string.
      * @return String containing the JSON-formatted map.
      */
     public String toJson()

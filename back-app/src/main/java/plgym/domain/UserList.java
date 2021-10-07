@@ -4,7 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Map;
 
 /**
- * Heir to DataList<T> which specifies T as 'User'.
+ * Heir to {@code DataList<T>} which specifies T as 'User'.
  * @author leodeorce
  * @author pedrovic7997
  */

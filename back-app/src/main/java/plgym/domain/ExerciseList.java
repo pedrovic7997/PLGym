@@ -4,7 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Map;
 
 /**
- * Heir to DataList<T> which specifies T as 'Exercise'.
+ * Heir to {@code DataList<T>} which specifies T as 'Exercise'.
  * @author leodeorce
  * @author pedrovic7997
  */

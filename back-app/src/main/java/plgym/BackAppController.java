@@ -120,6 +120,7 @@ public class BackAppController
 	
 	/**
 	 * Auxiliary function for debugging purposes.
+	 * @return Last ID read.
 	 */
 	public static String printAll()
 	{
