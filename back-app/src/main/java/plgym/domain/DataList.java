@@ -13,11 +13,21 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+/**
+ * Stores and manages instances of either Users or Exercises.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 public class DataList<T>
 {
     private Map<String, T> map;
 
-    // Creates DataList using specified file
+    /**
+     * Creates DataList using specified file.
+     * @param PATH_TO_FILE Full path to file to be opened.
+     * @param mapType TypeToken<Map<String, T>> where T is either User or Exercise.
+     *                Necessary for gson to be able to read the JSON formatted file.
+     */
     public DataList(String PATH_TO_FILE, TypeToken<Map<String, T>> mapType)
     {
         File file = new File(PATH_TO_FILE);
@@ -55,7 +65,13 @@ public class DataList<T>
         }
     }
 
-    // Creates DataList using specified IDs in 'database'
+    /**
+     * Creates DataList using specified IDs.
+     * @param ids Array of IDs of exercises to be added on construction.
+     * @param database Instantiated database.
+     * @param mapType TypeToken<Map<String, T>> where T is either User or Exercise.
+     *                Necessary for gson to be able to read the JSON formatted file.
+     */
     public DataList(String[] ids, DataList<T> database, TypeToken<Map<String, T>> mapType)
     {
         this.map = new HashMap<>();
@@ -65,49 +81,72 @@ public class DataList<T>
             if (value != null) this.map.put(id, value);
         }
     }
-
+    
+    /**
+     * Creates empty DataList.
+     * @param mapType TypeToken<Map<String, T>> where T is either User or Exercise.
+     *                Necessary for gson to be able to read the JSON formatted file.
+     */
     public DataList(TypeToken<Map<String, T>> mapType)
     {
         this.map = new HashMap<>();
     }
 	
+    /**
+     * Retrieves the map of <String, T> pairs DataList<T> uses.
+     * @return Map of type Map<String, T>.
+     */
     public Map<String, T> getMap()
     {
         return map;
     }
     
-    // Insert item
+    /**
+     * Adds a pair <String, T> to the map DataList<T> uses.
+     */
     public void addPair(String id, T content)
     {
         map.put(id, content);
     }
 
-    // Get item
+    /**
+     * Retrieves a value from the map DataList<T> uses associated with the specified key.
+     * @param id Key to which the value desired is associated.
+     * @return Value of type T associated with 'id'.
+     */
     public T getValue(String id)
     {
         return map.get(id);
     }
 
-    // Remove item
+    /**
+     * Removes a pair <String, T> from the map DataList<T> uses.
+     */
     public void removePair(String id)
     {
         map.remove(id);
     }
 
-    // Update item
+    /**
+     * Updates a <key, value> pair in the map DataList<T> uses.
+     * @param id Key to which the value to be updated is associated.
+     * @param content The value with which to update the pair.
+     */
     public void updateValue(String id, T content)
     {
         map.replace(id, content);
     }
 
-    // Transform map to JSON string
+    /**
+     * Transform the map DataList<T> uses into a JSON string.
+     * @return String containing the JSON-formatted map.
+     */
     public String toJson()
     {
         Gson gson = new Gson();
         return gson.toJson(map);
     }
-
-    //  Get a new and valid id value
+    
     public String getNewId()
     {
         String id = "";

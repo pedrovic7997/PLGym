@@ -1,5 +1,10 @@
 package plgym.domain.subdomain;
 
+/**
+ * Exercises difficulty enumerated class.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 public enum Difficulty
 {
     FACIL {

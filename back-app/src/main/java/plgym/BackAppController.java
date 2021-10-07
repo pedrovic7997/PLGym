@@ -20,6 +20,11 @@ import plgym.domain.User;
 import plgym.domain.UserList;
 import plgym.util.Persistence;
 
+/**
+ * Handles most HTTP requests.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 @RestController
 public class BackAppController
 {
@@ -34,7 +39,6 @@ public class BackAppController
 	
 	/**
 	 * Retrieves all user info on the user responsible for the request.
-	 * 
 	 * @param principal Object housing relevant logged in user's info from the session
 	 * @return Object with the logged in user's info from the database
 	 */
@@ -50,21 +54,18 @@ public class BackAppController
 	
 	/**
 	 * Creates and stores a user using the specified object.
-	 * 
 	 * @param newUser 'User' object with the new user's info
 	 */
 	@PostMapping("/user")
 	public void postUser(@RequestBody User newUser)
 	{
 		userDB.addPair(newUser.getEmail(), newUser);
-		System.out.println(userDB.getValue(newUser.getEmail()));
 		serializeJson(userDB.toJson(), userDbFileName);
 		throw new ResponseStatusException(HttpStatus.OK, "Usuário cadastrado");
 	}
 
 	/**
 	 * Receive the modifications to be made on the user currently requesting them.
-	 * 
 	 * @param modifiedUser Object housing modifications in user's info from the session
 	 * @param principal Object housing relevant logged in user's info from the session
 	 * @return Object with the logged in user's info from the database
@@ -85,7 +86,6 @@ public class BackAppController
 	
 	/**
 	 * Adds an exercise to the exercise list of the user responsible for the request.
-	 * 
 	 * @param exerciseId A string with the ID of the exercise to be added to the user's list
 	 * @param principal Object housing relevant logged in user's info from the session
 	 */
@@ -103,7 +103,6 @@ public class BackAppController
 	
 	/**
 	 * Deletes an exercise from the exercise list of the user responsible for the request.
-	 * 
 	 * @param exerciseId A string with the ID of the exercise to be deleted from the user's list
 	 * @param principal Object housing relevant logged in user's info from the session
 	 */
@@ -134,7 +133,6 @@ public class BackAppController
 	
 	/**
 	 * Serializes a string to a file, overwriting it.
-	 * 
 	 * @param json JSON as string to be serialized
 	 * @param fileName Filename to be completely overwritten by the string
 	 */

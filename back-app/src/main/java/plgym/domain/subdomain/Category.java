@@ -1,5 +1,10 @@
 package plgym.domain.subdomain;
 
+/**
+ * Exercises category enumerated class.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 public enum Category
 {
     OMBRO {

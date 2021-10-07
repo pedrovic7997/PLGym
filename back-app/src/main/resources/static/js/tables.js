@@ -1,3 +1,8 @@
+/**
+ * Manages DataTables tool settings and HTTP requests on table button clicks.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 $(document).ready(function() {
     let tableDiscover = $('#table-discover').DataTable( {
         "language": {

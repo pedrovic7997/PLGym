@@ -12,6 +12,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import plgym.BackAppController;
 import plgym.domain.User;
 
+/**
+ * Handles Spring Security.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter
@@ -26,12 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/signup", "/user", "/js/**", "/css/**", "/assets/**").permitAll()
-                .antMatchers("/exercises*").access("hasAnyAuthority('USER')")
                 .antMatchers("/myworkout").access("hasAnyAuthority('USER')")
                 .antMatchers("/discover").access("hasAnyAuthority('USER')")
                 .antMatchers("/suggestions").access("hasAnyAuthority('USER')")
                 .antMatchers("/profile").access("hasAnyAuthority('USER')")
-//              .antMatchers("/admin").access("hasAnyAuthority('ADMIN')")
             .anyRequest()
                 .authenticated()
             .and()
@@ -45,9 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .logoutSuccessUrl("/login?logout").permitAll();
 
         http.csrf().disable();
-        // http.headers().frameOptions().disable();
     }
-
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         for (User user : BackAppController.userDB.getMap().values()) {

@@ -1,4 +1,10 @@
-function handleForm() {
+/**
+ * Handles user sign-up.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
+function handleForm()
+{
     let data = {
         "name" : $("#name").val(),
         "email" : $("#email").val(),
