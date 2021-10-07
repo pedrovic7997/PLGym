@@ -1,3 +1,4 @@
+# Índice
 <ul>
 	<li><a href="#plgym">PLgym</a></li>
 	<li><a href="#sobre">Sobre o projeto</a></li>
@@ -10,6 +11,7 @@
 		</ul>
 	</li>
 	<li><a href="#exemplo-de-uso">Exemplo de uso</a></li>
+	<li><a href="#javadoc">Javadoc</a></li>
 	<li><a href="#licen-a">Licença</a></li>
 	<li><a href="#contato">Contato</a></li>
 </ul>
@@ -85,6 +87,16 @@ java -cp ./target/admin-tool-1.0-jar-with-dependencies.jar plgtool.App
 Para ilustrar alguns exemplos de uso, temos um [vídeo](https://www.youtube.com/embed/9r8Xv2tUghc?start=29&end=182) demonstrando a navegação no site.
 
 **OBS:** Na versão atual do programa, o cadastro está funcionando porém para acessar com a conta criada, por motivos técnicos, o comando que liga o Spring deverá ser refeito para reiniciar a aplicação e assim fazer o login utilizando a conta nova.
+
+# Javadoc
+
+Para gerar páginas javadoc com o plugin Maven Javadoc, navegue para a pasta back-app e execute o seguinte comando
+
+```sh
+mvn javadoc:javadoc
+```
+
+As páginas se encontrarão no diretório ./target/site/apidocs.
 
 # Licença
 
