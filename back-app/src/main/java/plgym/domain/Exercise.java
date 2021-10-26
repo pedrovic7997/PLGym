@@ -3,6 +3,11 @@ package plgym.domain;
 import plgym.domain.subdomain.Category;
 import plgym.domain.subdomain.Difficulty;
 
+/**
+ * Represents an exercise.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 public class Exercise
 {
     private String linkYT;

@@ -12,6 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Admin tool for managing exercise database.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 public class App
 {
     public static void main(String[] args)
@@ -30,7 +35,6 @@ public class App
                 System.out.println("0. Exit");
                 System.out.println("1. Add new exercise");
                 System.out.println("2. Delete exercise");
-                // TODO updateExercise()
                 System.out.println("3. List all exercises");
                 System.out.print("Option: ");
                 String optionString = keyReader.readLine();
@@ -46,6 +50,12 @@ public class App
         }
     }
     
+    /**
+     * Serializes exercise list.
+     * @param exerciseList Instantiated exercise database.
+     * @param PATH_TO_JSON Full path to exercise JSON database.
+     * @throws IOException
+     */
     private static void serializeExercises(ExerciseList exerciseList, String PATH_TO_JSON) throws IOException
     {
         // Creates JSON string to be written to file
@@ -56,7 +66,13 @@ public class App
         writer.write(json);
         writer.close();
     }
-
+    
+    /**
+     * Deletes an exercise from the database.
+     * @param keyReader BufferedReader from main.
+     * @param PATH_TO_JSON Full path to exercise JSON database.
+     * @throws IOException
+     */
     private static void deleteExercise(BufferedReader keyReader, String PATH_TO_JSON) throws IOException
     {
         // Retrieves ID of exercise to be deleted
@@ -71,7 +87,13 @@ public class App
         
         System.out.println("Deleted exercise [" + id + "] successfully.");
     }
-
+    
+    /**
+     * Adds a new exercise to the database.
+     * @param keyReader BufferedReader from main.
+     * @param PATH_TO_JSON Full path to exercise JSON database.
+     * @throws IOException
+     */
     private static void addNewExercise(BufferedReader keyReader, String PATH_TO_JSON) throws IOException
     {
         // Retrieves exercise name
@@ -124,6 +146,10 @@ public class App
         System.out.println("\nCreated successfully. Exercise ID is " + id);
     }
     
+    /**
+     * Lists all exercises.
+     * @param PATH_TO_JSON Full path to exercise JSON database.
+     */
     private static void listAllExercises(String PATH_TO_JSON)
     {
         // Creates auxiliary exercise list with all registered exercises as objects

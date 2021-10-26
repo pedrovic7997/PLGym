@@ -4,60 +4,44 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.lang.Long;
 import java.security.Principal;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import plgym.domain.Exercise;
 import plgym.domain.ExerciseList;
 import plgym.domain.User;
 import plgym.domain.UserList;
 import plgym.util.Persistence;
 
+/**
+ * Handles most HTTP requests.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
 @RestController
 public class BackAppController
 {
-//  	private static final String filePath = "/home/pedro/IdeaProjects/PLGym/back-app/src/main/resources/data/";
-	private static final String filePath = "C:/Users/Leonardo/IdeaProjects/PLGym/back-app/src/main/resources/data/";
+	// filePath needs to be a full path to back-app/src/main/resources/data folder
+	// to access our already built examples of user and exercises files
+	// or point it to wherever you would like your JSON database to be
+	private static final String filePath = "/full/path/to/resources/data";
 	private static final String userDbFileName = "users.json";
 	private static final String exerciseDbFileName = "exercises.json";
-    public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
-    public static UserList userDB = new UserList(filePath + userDbFileName);
-
-    @GetMapping("/exercises")
-	public ExerciseList getExercises(@RequestParam(name = "exer", defaultValue = "") String exer, Principal principal)
-    {
-		System.out.println(principal.getName());
-		ExerciseList filteredExercises = new ExerciseList();
-		for (String id : exerciseDB.getMap().keySet())
-		{
-			Exercise exercise = exerciseDB.getValue(id);
-			if (exercise.getName().contains(exer)) {
-				filteredExercises.addPair(id, exercise);
-			}
-		}
-		return filteredExercises;
-	}
-
-	@GetMapping("/exercises/{id}")
-	public Exercise getExercise(@PathVariable(name = "id") long id)
-	{
-		if (exerciseDB.getValue(Long.toString(id)) == null)
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exercício não encontrado");
-		else
-			return exerciseDB.getValue(Long.toString(id));
-	}
-
+	public static ExerciseList exerciseDB = new ExerciseList(filePath + exerciseDbFileName);
+	public static UserList userDB = new UserList(filePath + userDbFileName);
+	
+	/**
+	 * Retrieves all user info on the user responsible for the request.
+	 * @param principal Object housing relevant logged in user's info from the session
+	 * @return Object with the logged in user's info from the database
+	 */
 	@GetMapping("/user")
 	public User getUser(Principal principal)
 	{
@@ -67,18 +51,25 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
 	}
-
+	
+	/**
+	 * Creates and stores a user using the specified object.
+	 * @param newUser 'User' object with the new user's info
+	 */
 	@PostMapping("/user")
 	public void postUser(@RequestBody User newUser)
 	{
-//		String newId = userDB.getNewId();
-//		System.out.println(newId + " " + newUser.getEmail() + " " + newUser.getPassword());
 		userDB.addPair(newUser.getEmail(), newUser);
-		System.out.println(userDB.getValue(newUser.getEmail()));
 		serializeJson(userDB.toJson(), userDbFileName);
 		throw new ResponseStatusException(HttpStatus.OK, "Usuário cadastrado");
 	}
 
+	/**
+	 * Receive the modifications to be made on the user currently requesting them.
+	 * @param modifiedUser Object housing modifications in user's info from the session
+	 * @param principal Object housing relevant logged in user's info from the session
+	 * @return Object with the logged in user's info from the database
+	 */
 	@PutMapping("/user")
 	public User putUser(@RequestBody User modifiedUser, Principal principal)
 	{
@@ -92,7 +83,12 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
 	}
-
+	
+	/**
+	 * Adds an exercise to the exercise list of the user responsible for the request.
+	 * @param exerciseId A string with the ID of the exercise to be added to the user's list
+	 * @param principal Object housing relevant logged in user's info from the session
+	 */
 	@PutMapping("/user/exercises")
 	public void putExercise(@RequestBody String exerciseId, Principal principal)
 	{
@@ -104,7 +100,12 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
 	}
-
+	
+	/**
+	 * Deletes an exercise from the exercise list of the user responsible for the request.
+	 * @param exerciseId A string with the ID of the exercise to be deleted from the user's list
+	 * @param principal Object housing relevant logged in user's info from the session
+	 */
 	@DeleteMapping("/user/exercises")
 	public void deleteExercise(@RequestBody String exerciseId, Principal principal)
 	{
@@ -116,7 +117,11 @@ public class BackAppController
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
 	}
-
+	
+	/**
+	 * Auxiliary function for debugging purposes.
+	 * @return Last ID read.
+	 */
 	public static String printAll()
 	{
 		String ex = "";
@@ -126,7 +131,12 @@ public class BackAppController
 		}
 		return ex;
 	}
-
+	
+	/**
+	 * Serializes a string to a file, overwriting it.
+	 * @param json JSON as string to be serialized
+	 * @param fileName Filename to be completely overwritten by the string
+	 */
 	public void serializeJson(String json, String fileName)
 	{
 		try {

@@ -3,7 +3,13 @@ package plgym.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+/**
+ * Represents a user.
+ * @author leodeorce
+ * @author pedrovic7997
+ */
+public class User
+{
     private String name;
     private String birthdate;
     private String email;
